@@ -1,0 +1,108 @@
+.qr-code-component{
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  background-image: linear-gradient(320deg, #0f0f0f 0%, #1d1d1d 100%);
+  box-shadow:  20px 20px 60px #000000,
+             -20px -20px 60px #151515;
+  border-radius: 2rem;
+  padding: 1rem 2rem;
+  & h2 {
+    margin-bottom: 1rem;
+  }
+  & .qr-code-container {
+    width: clamp(100px, 100%, 200px);
+    aspect-ratio: 1/1;
+    height: clamp(100px, auto, 150px);
+    background-color: var(--bg-light-2);
+    border-radius: 1rem;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .loader {
+        width: 48px;
+        height: 48px;
+        display: inline-block;
+        position: relative;
+        }
+    .loader::after,
+    .loader::before {
+    content: '';  
+    box-sizing: border-box;
+    width: 48px;
+    height: 48px;
+    border: 2px solid #FFF;
+    position: absolute;
+    left: 0;
+    top: 0;
+    animation: rotationBreak 3s ease-in-out infinite alternate;
+    }
+    .loader::after {
+    border-color: #FECC00;
+    animation-direction: alternate-reverse;
+    }
+
+    @keyframes rotationBreak {
+    0% {
+        transform: rotate(0);
+    }
+    25% {
+        transform: rotate(90deg);
+    }
+    50% {
+        transform: rotate(180deg);
+    }
+    75% {
+        transform: rotate(270deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+    }
+            
+    & div {
+      height: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+    }
+  }
+  & input {
+    background-color: transparent;
+    border-radius: 1rem;
+    padding: 0.618rem 1.618rem;
+        border: 1px solid var(--border);
+    margin-bottom: 0.6rem;
+    background: #1c1c1c;
+    box-shadow: inset 3px 3px 7px #080808,
+            inset -3px -3px 7px #222222;
+
+
+  }
+  & button {
+    width: 100%;
+    background-color: transparent;
+    border-radius: 1rem;
+    padding: 0.618rem 1.618rem;
+    margin-top: 1rem;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    margin-bottom: 0.6rem;
+    border-radius: 37px;
+    background: #151515;
+    box-shadow:  3px 3px 7px #080808,
+                -3px -3px 7px #222222;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    &:hover {
+      background-color: var(--bg-light-2);
+    }
+  }
+}
