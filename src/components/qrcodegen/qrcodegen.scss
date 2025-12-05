@@ -7,9 +7,20 @@
   box-shadow:  20px 20px 60px #000000,
              -20px -20px 60px #151515;
   border-radius: 2rem;
-  padding: 1rem 2rem;
+  padding: 1rem 2rem 2rem 2rem;
+  width: 50vw;
   max-width: 250px;
   position: relative;
+  &::before{
+    content: "";    
+    position: absolute;
+    inset: 0; /* mismo tamaño que la card */
+    border-radius: 2rem; /* igual que tu card */
+    z-index: -2; /* debajo de todo */
+    pointer-events: none;
+    box-shadow:  20px 20px 60px #000000,
+              -20px -20px 60px #151515;
+  }
   & h2 {
     margin-bottom: 1rem;
   }
@@ -17,7 +28,7 @@
     position: absolute;
     top: 1.5rem;
     right: 1.5rem;
-    color: #666666;
+    color: #9c9c9c;
     cursor: pointer;
     transition: color 0.3s ease-in-out;
     &:hover {
@@ -98,6 +109,7 @@
             inset -3px -3px 7px #222222;
     font-family: 'Inter', sans-serif;
     font-weight: 600;
+    width: 100%;
   }
   & .generar-button {
     width: 100%;
