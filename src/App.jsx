@@ -16,6 +16,7 @@ function App() {
       <div className="card">
         <QRGen />
       </div>
+      <span className="credits">Developed by Camara\TBWA</span>
     </>
   );
 }
