@@ -1,4 +1,4 @@
-import "./ExportOptionsModal.scss";
+import "./exportOptionsModal.scss";
 import CardOption from "./cardOption";
 
 export default function ExportOptionsModal({
