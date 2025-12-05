@@ -2,6 +2,7 @@ import { useState } from "react";
 import camaraLogo from "./assets/logo/camaratbwa_logo.jpeg";
 import "./App.css";
 import "./styles/exportOptionsPanel.scss"
+import "./styles/toast.scss"
 import QRGen from "./components/qrcodegen/QRGen";
 import ExportOptionsPanel from "./components/qrcodegen/ExportOptionsPanel";
 
@@ -13,6 +14,13 @@ function App() {
     size: 150,
     margin: 0,
   });
+
+    const [toast, setToast] = useState(null);
+
+    const showToast = (msg) => {
+    setToast(msg);
+    setTimeout(() => setToast(null), 2500); // duración del toast
+    };
 
   return (
     <main>
@@ -33,10 +41,12 @@ function App() {
           isOpen={isPanelOpen}
           options={exportOptions}
           setOptions={setExportOptions}
+          showToast={showToast}
         />
 
       </div>
       <span className="credits">Developed by Camara\TBWA</span>
+      {toast && <div className="toast">{toast}</div>}
     </main>
   );
 }

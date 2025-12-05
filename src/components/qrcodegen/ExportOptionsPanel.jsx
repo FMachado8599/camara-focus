@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "../../styles/exportOptionsPanel.scss"
 import CardOption from "./exportOptionsModal/cardOption";
 import ColorPicker from "./exportOptionsModal/ColorPicker";
@@ -6,9 +7,12 @@ export default function ExportOptionsPanel({
   isOpen,
   options,
   setOptions,
+  showToast
 }) {
   const handleSave = () => {
     console.log("Opciones guardadas:", options);
+    isOpen=true;
+    showToast("Opciones guardadas");
   };
 
   return (

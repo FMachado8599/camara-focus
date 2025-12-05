@@ -111,6 +111,10 @@
     font-weight: 600;
     width: 100%;
     max-width: 186px;
+    &:focus,
+    :focus-visible {
+      outline: 4px auto rgb(from #FECC00 r g b / 70%);
+    }
   }
   & .generar-button {
     width: 100%;
