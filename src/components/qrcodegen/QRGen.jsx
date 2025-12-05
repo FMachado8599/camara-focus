@@ -64,8 +64,9 @@ const QRGen = () => {
               value={text}
               bgColor="transparent"
               fgColor="#ffffff"
-              size={128}
               id="qr-generated"
+              size={128}  
+              marginSize={exportOptions.margin}
             />
           </div>
         )}
@@ -81,7 +82,7 @@ const QRGen = () => {
       </button>
       <button
         className={showQR ? "descargar-button" : "disabled-button"}
-        onClick={showQR ? handleDownload : undefined}
+        onClick={() => handleDownload(exportOptions)}
         disabled={!showQR}
       >
         Descargar

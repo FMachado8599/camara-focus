@@ -1,5 +1,6 @@
 import "./exportOptionsModal.scss";
 import CardOption from "./cardOption";
+import ColorPicker from "./ColorPicker";
 
 export default function ExportOptionsModal({
   isOpen,
@@ -20,7 +21,7 @@ export default function ExportOptionsModal({
         <div className="option-section">
           <h4>Tamaño</h4>
           <div className="option-grid">
-            {[128, 256, 512].map((size) => (
+            {[150, 300, 500, 1000].map((size) => (
               <CardOption
                 key={size}
                 label={`${size}px`}
@@ -40,7 +41,7 @@ export default function ExportOptionsModal({
             {[0, 4, 8, 16].map((margin) => (
               <CardOption
                 key={margin}
-                label={`${margin}px`}
+                label={`${margin}pt`}
                 value={margin}
                 current={options.margin}
                 onChange={(val) =>
@@ -63,13 +64,36 @@ export default function ExportOptionsModal({
               }
             />
             <CardOption
-              label="PNG (pronto)"
+              label="PNG"
               value="png"
               current={options.format}
-              disabled={true}
+              onChange={(val) =>
+                setOptions((prev) => ({ ...prev, format: val }))
+              }
             />
           </div>
         </div>
+          {/* <div className="option-section">
+            <h4>Color del QR</h4>
+            <ColorPicker
+              color={options.fgColor}
+              onUpdate={(id, newColor) =>
+                setOptions(prev => ({ ...prev, fgColor: newColor }))
+              }
+              simple
+            />
+          </div>
+
+          <div className="option-section">
+            <h4>Fondo</h4>
+            <ColorPicker
+              color={options.bgColor}
+              onUpdate={(id, newColor) =>
+                setOptions(prev => ({ ...prev, bgColor: newColor }))
+              }
+              simple
+            />
+          </div> */}
         <div className="modal-actions">
           <button onClick={onClose}>Cancelar</button>
           <button className="boton-guardar" onClick={handleSave}>
