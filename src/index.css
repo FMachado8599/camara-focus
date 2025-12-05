@@ -62,11 +62,10 @@ button:focus-visible {
   :root {
     color: #213547;
     background-color: #ffffff;
-  }
+  }s
   a:hover {
     color: #FECC00;
   }
   button {
     background-color: #f9f9f9;
   } */
-}
