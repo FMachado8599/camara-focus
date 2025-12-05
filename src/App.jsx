@@ -1,11 +1,10 @@
-import { useState } from 'react'
-import camaraLogo from './assets/logo/camaratbwa_logo.jpeg'
-import './App.css'
-import QRGen from './components/QRGen'
-
+import { useState } from "react";
+import camaraLogo from "./assets/logo/camaratbwa_logo.jpeg";
+import "./App.css";
+import QRGen from "./components/qrcodegen/QRGen";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   return (
     <>
@@ -15,10 +14,10 @@ function App() {
         </a>
       </div>
       <div className="card">
-        <QRGen/>
+        <QRGen />
       </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

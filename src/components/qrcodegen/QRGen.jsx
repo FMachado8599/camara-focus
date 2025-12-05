@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { QRCodeSVG } from "qrcode.react";
-import './qrcodegen/qrcodegen.scss';
+import "./qrcodegen.scss";
+import { handleDownload } from "../../utils/download/qrGenUtils";
 
 const QRGen = () => {
   const [text, setText] = useState("");
@@ -25,7 +26,18 @@ const QRGen = () => {
   return (
     <div className="qr-code-component">
       <h2>URL a QR</h2>
-      <div className="qr-code-container" >
+      <div className="qr-code-container">
+        {!loading && !showQR && text.trim() === "" && (
+          <div style={{ opacity: 0.1 }}>
+            <QRCodeSVG
+              value="https://www.camaratbwa.com/"
+              bgColor="transparent"
+              fgColor="#ffffff"
+              size={128}
+            />
+          </div>
+        )}
+
         {loading && <span class="loader"></span>}
 
         {showQR && (
@@ -35,6 +47,7 @@ const QRGen = () => {
               bgColor="transparent"
               fgColor="#ffffff"
               size={128}
+              id="qr-generated"
             />
           </div>
         )}
@@ -42,10 +55,19 @@ const QRGen = () => {
       <input
         type="text"
         value={text}
-        placeholder="Escribir..."
+        placeholder="Escribe o pega tu URL aquí"
         onChange={(e) => setText(e.target.value)}
       />
-      <button onClick={handleGenerate}>Generar</button>
+      <button className="generar-button" onClick={handleGenerate}>
+        Generar
+      </button>
+      <button
+        className={showQR ? "descargar-button" : "disabled-button"}
+        onClick={showQR ? handleDownload : undefined}
+        disabled={!showQR}
+      >
+        Descargar
+      </button>
     </div>
   );
 };
