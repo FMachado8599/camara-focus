@@ -20,12 +20,12 @@ export default function ExportOptionsPanel({
       <h3>Opciones de exportación</h3>
 
       <div className="option-section">
-        <h4>Tamaño</h4>
+        <h4>Tamaño <span>(px)</span> </h4>
         <div className="option-grid">
           {[150, 300, 500, 1000].map((size) => (
             <CardOption
               key={size}
-              label={`${size}px`}
+              label={`${size}`}
               value={size}
               current={options.size}
               onChange={(val) =>
@@ -37,12 +37,12 @@ export default function ExportOptionsPanel({
       </div>
 
       <div className="option-section">
-        <h4>Margen</h4>
+        <h4>Margen <span>(pt)</span></h4>
         <div className="option-grid">
           {[0, 4, 8, 16].map((margin) => (
             <CardOption
               key={margin}
-              label={`${margin}pt`}
+              label={`${margin}`}
               value={margin}
               current={options.margin}
               onChange={(val) =>
