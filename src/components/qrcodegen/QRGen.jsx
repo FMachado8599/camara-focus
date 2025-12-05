@@ -2,11 +2,20 @@ import { useState } from "react";
 import { QRCodeSVG } from "qrcode.react";
 import "./qrcodegen.scss";
 import { handleDownload } from "../../utils/download/qrGenUtils";
+import { Bolt } from "lucide-react";
+import ExportOptionsModal from "./exportOptionsModal/exportOptionsModal";
 
 const QRGen = () => {
   const [text, setText] = useState("");
   const [showQR, setShowQR] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [showOptionsModal, setShowOptionsModal] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [exportOptions, setExportOptions] = useState({
+    format: "svg",
+    size: 128,
+    margin: 0,
+  });
 
   const handleGenerate = async () => {
     if (text.trim() === "") {
@@ -26,6 +35,15 @@ const QRGen = () => {
   return (
     <div className="qr-code-component">
       <h2>URL a QR</h2>
+      <span className="option-menu">
+        <Bolt size={18} onClick={() => setIsModalOpen(true)} />
+      </span>
+      <ExportOptionsModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        options={exportOptions}
+        setOptions={setExportOptions}
+      />
       <div className="qr-code-container">
         {!loading && !showQR && text.trim() === "" && (
           <div style={{ opacity: 0.1 }}>

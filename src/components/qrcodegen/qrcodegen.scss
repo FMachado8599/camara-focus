@@ -9,8 +9,20 @@
   border-radius: 2rem;
   padding: 1rem 2rem;
   max-width: 250px;
+  position: relative;
   & h2 {
     margin-bottom: 1rem;
+  }
+  & .option-menu {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    color: #666666;
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+    &:hover {
+      color: #FECC00;
+    }
   }
   & .qr-code-container {
     width: clamp(100px, 100%, 100vw);

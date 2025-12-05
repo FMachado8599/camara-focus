@@ -1,0 +1,59 @@
+.option-section {
+  margin-bottom: 24px;
+
+  h4 {
+    margin-bottom: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+  }
+}
+
+.option-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
+  gap: 12px;
+}
+
+.card-option {
+  background: #1f1f1f;
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 16px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .card-label {
+    font-size: 14px;
+    color: #e7e7e7;
+  }
+
+  .checkmark {
+    font-size: 14px;
+    color: #FECC00; // violeta suave como la imagen
+    font-weight: 700;
+  }
+
+  &:hover {
+    border-color: #FECC00;
+    background: rgb(from #FECC00 r g b / 10% );
+  }
+
+  &.active {
+    border-color: #FECC00;
+    background: rgb(from #FECC00 r g b / 10% );
+
+    .card-label {
+      color: #fff;
+    }
+  }
+
+  &.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}

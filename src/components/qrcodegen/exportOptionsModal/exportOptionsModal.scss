@@ -1,0 +1,52 @@
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(3px);
+  z-index: 999;
+}
+
+.modal {
+  background: rgba(15, 15, 15, .80);
+  backdrop-filter: blur(30px);
+  padding: 2rem;
+  border-radius: 2rem;
+  width: 300px;
+  animation: fadeIn 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal h3 {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.modal-actions {
+    margin-top: 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    width: 100%;
+    & button{
+        width: 100%;
+    }
+    & .boton-guardar {
+        background: rgb(from #FECC00 r g b / 30% );
+        color: #fff;
+        font-weight: 700;
+        border: none;
+        &:hover {
+            background: rgb(from #FECC00 r g b / 100% );
+            color: #000;
+        }
+    }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
