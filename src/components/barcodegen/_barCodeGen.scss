@@ -1,0 +1,94 @@
+@import "../../styles/mixins";
+
+.barcodeGen {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.barcode-svg {
+  opacity: 0;
+  animation: fadeInBarcode 1s ease forwards;
+}
+
+@keyframes fadeInBarcode {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.barcode-card {
+  @include neo-card(250px);
+
+  input {
+    @include control-input();
+    &::placeholder {
+    color: #777;
+    opacity: 1;
+    }
+  }
+  
+
+  .generar-button {
+    @include btn-dark(1rem, 0.6rem);
+  }
+
+  .descargar-button {
+    @include btn-primary;
+  }
+
+  .disabled-button {
+    @include btn-disabled;
+  }
+
+  .barcode-preview {
+    width: clamp(100px, 100%, 100vw);
+    aspect-ratio: 1/1;
+    height: clamp(100px, auto, 150px);
+    background: #151515;
+    box-shadow:  3px 3px 7px #080808,
+                -3px -3px 7px #222222;
+    border-radius: 1rem;
+    overflow: hidden;
+    padding: .6rem;
+    margin: 0;
+    margin-bottom: 1.6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    & .preview-placeholder{
+        opacity: 0.1;
+        padding: .6rem;
+    }
+  }
+}
+
+.barcode-header {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  position: relative;
+
+  h2 {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    text-align: center;
+  }
+
+  .barcode-settings {
+    position: absolute;
+    right: 0;
+    cursor: pointer;
+    color: #9c9c9c;
+
+    &:hover {
+      color: #FECC00;
+    }
+  }
+}
+

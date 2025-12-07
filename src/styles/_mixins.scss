@@ -1,0 +1,163 @@
+// Mixins globales para la app TBWA
+
+// CARD BASE NEOMÓRFICA
+@mixin neo-card($maxWidth: 250px) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background-image: linear-gradient(320deg, #0f0f0f 0%, #1d1d1d 100%);
+  border-radius: 2rem;
+  padding: 1rem 2rem 2rem 2rem;
+
+  width: 100%;
+  max-width: $maxWidth;
+  position: relative;
+
+  /* Sombra externa suave */
+  box-shadow:
+    10px 10px 25px rgba(0, 0, 0, 0.6),
+    -10px -10px 25px rgba(40, 40, 40, 0.4);
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 2rem;
+    pointer-events: none;
+
+    /* Sombra neumórfica fuerte */
+    box-shadow: 
+      20px 20px 60px #000000,
+      -20px -20px 60px #151515;
+
+    z-index: -1;
+  }
+}
+
+// BOTÓN BASE TBWA
+@mixin btn-base {
+  width: 100%;
+  padding: 0.618rem 1.618rem;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  border-radius: 37px;
+  cursor: pointer;
+  border: 1px solid var(--border, #333);
+
+  box-shadow:
+    3px 3px 7px #080808,
+    -3px -3px 7px #222222;
+
+  transition: all 0.3s ease-in-out;
+}
+
+// INPUT BASE (el del QR)
+@mixin control-input($maxWidth: 186px) {
+  background-color: transparent;
+  border-radius: 1rem;
+  padding: 0.618rem 1.618rem;
+  border: 1px solid var(--border);
+  background: #1c1c1c;
+  box-shadow:
+    inset 3px 3px 7px #080808,
+    inset -3px -3px 7px #222222;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  width: 100%;
+  max-width: $maxWidth;
+
+  &:focus,
+  &:focus-visible {
+    outline: 4px auto rgb(from #FECC00 r g b / 70%);
+  }
+}
+
+// BOTÓN BASE (lo común a todos tus botones)
+@mixin btn-base($margin-top: 0, $margin-bottom: 0) {
+  width: 100%;
+  background-color: transparent;
+  padding: 0.618rem 1.618rem;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  border-radius: 37px;
+  box-shadow:
+    3px 3px 7px #080808,
+    -3px -3px 7px #222222;
+  font-weight: 700;
+  margin-top: $margin-top;
+  margin-bottom: $margin-bottom;
+  transition: all 0.3s ease-in-out;
+}
+
+// INPUT BASE (el del QR)
+@mixin control-input($maxWidth: 186px) {
+  background-color: transparent;
+  border-radius: 1rem;
+  padding: 0.618rem 1.618rem;
+  border: 1px solid var(--border);
+  background: #1c1c1c;
+  box-shadow:
+    inset 3px 3px 7px #080808,
+    inset -3px -3px 7px #222222;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  width: 100%;
+  max-width: $maxWidth;
+
+  &:focus,
+  &:focus-visible {
+    outline: 4px auto rgb(from #FECC00 r g b / 70%);
+  }
+}
+
+// BOTÓN BASE (lo común a todos tus botones)
+@mixin btn-base($margin-top: 0, $margin-bottom: 0) {
+  width: 100%;
+  background-color: transparent;
+  padding: 0.618rem 1.618rem;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  border-radius: 37px;
+  box-shadow:
+    3px 3px 7px #080808,
+    -3px -3px 7px #222222;
+  font-weight: 700;
+  margin-top: $margin-top;
+  margin-bottom: $margin-bottom;
+  transition: all 0.3s ease-in-out;
+}
+
+// GENERAR (botón oscuro)
+@mixin btn-dark($margin-top: 1rem, $margin-bottom: 0.6rem) {
+  @include btn-base($margin-top, $margin-bottom);
+  background: #151515;
+
+  &:hover {
+    background-color: var(--bg-light-2);
+  }
+}
+
+// DESCARGAR (botón amarillo)
+@mixin btn-primary {
+  @include btn-base; // sin márgenes extra
+  color: #151515;
+  background-image: linear-gradient(320deg, #FECC00 0%, #FECC00 100%);
+
+  &:hover {
+    background-image: linear-gradient(320deg, #FECC00 0%, #ffdd57 100%);
+  }
+}
+
+// DESHABILITADO
+@mixin btn-disabled {
+  @include btn-base; // mismos paddings, sombras, etc.
+  color: #151515;
+  background-image: linear-gradient(320deg, #383838 0%, #383838 100%);
+  cursor: auto;
+}
+
+
+

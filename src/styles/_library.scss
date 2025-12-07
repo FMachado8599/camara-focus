@@ -1,0 +1,22 @@
+    .loader {
+        width: 48px;
+        height: 48px;
+        display: inline-block;
+        position: relative;
+        }
+    .loader::after,
+    .loader::before {
+    content: '';  
+    box-sizing: border-box;
+    width: 48px;
+    height: 48px;
+    border: 2px solid #FFF;
+    position: absolute;
+    left: 0;
+    top: 0;
+    animation: rotationBreak 3s ease-in-out infinite alternate;
+    }
+    .loader::after {
+    border-color: #FECC00;
+    animation-direction: alternate-reverse;
+    }

@@ -1,70 +1,74 @@
-.genLayout {
-  display: flex;
-  width: 100%;
-  position: relative;
-}
+// .genLayout {
+//   display: flex;
+//   width: 100%;
+//   position: relative;
+// }
 
-/* CARD PRINCIPAL */
-.mainCard {
-  flex: 1;
-  transition: transform .35s cubic-bezier(.4,0,.2,1);
-  z-index: 1;
-  position: relative;
-}
+// /* CARD PRINCIPAL */
+// .mainCard {
+//   flex: 1;
+//   transition: transform .35s cubic-bezier(.4,0,.2,1);
+//   z-index: 1;
+//   position: relative;
+// }
 
-.genLayout.closed .mainCard {
-  transform: translateX(50%);
-}
+// .genLayout--qr.closed .mainCard {
+//   transform: translateX(50%);
+// }
 
-/* PANEL LATERAL */
-.optionsPanel {
-  width: 250px;
-  background: #111;
-  color: white;
-  padding: 1rem 2rem 2rem 2rem;
-  border-left: 1px solid #222;
+// .genLayout--bar.closed .mainCard {
+//   transform: translateX(50%);
+// }
 
-  transition: transform .35s cubic-bezier(.4,0,.2,1);
-  transform: translateX(2rem);
-  z-index: 0;
-  background-image: linear-gradient(320deg, #0f0f0f 0%, #1d1d1d 100%);
-position: relative; 
-  border-radius: 2rem;
-  box-shadow:  20px 20px 60px #000000,
-            -20px -20px 60px #151515;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height:470px;
-    overflow: hidden;
-    scroll-behavior: smooth;
-    overflow-y: scroll;
-    &::-webkit-scrollbar {
-        display: none;
-    }
-}
+// /* PANEL LATERAL */
+// .optionsPanel {
+//   width: 250px;
+//   background: #111;
+//   color: white;
+//   padding: 1rem 2rem 2rem 2rem;
+//   border-left: 1px solid #222;
 
-.optionsPanel.closed {
-  transform: translateX(-50%);
-  z-index: 0;
-  animation: card-motion .1s ease-in-out;
-}
+//   transition: transform .35s cubic-bezier(.4,0,.2,1);
+//   transform: translateX(2rem);
+//   z-index: 0;
+//   background-image: linear-gradient(320deg, #0f0f0f 0%, #1d1d1d 100%);
+// position: relative; 
+//   border-radius: 2rem;
+//   box-shadow:  20px 20px 60px #000000,
+//             -20px -20px 60px #151515;
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: space-between;
+//     height:470px;
+//     overflow: hidden;
+//     scroll-behavior: smooth;
+//     overflow-y: scroll;
+//     &::-webkit-scrollbar {
+//         display: none;
+//     }
+// }
 
-.panel-actions button{
-    width: 100%;
-    border-radius: 99px;
-    color: #000000;
-    background-image: linear-gradient(320deg, #FECC00 0%, #FECC00 100%);
-    &:hover {
-      background-image: linear-gradient(320deg, #FECC00 0%, #ffdd57 100%);
-    }
-}
-.option-section{
-    margin-bottom: 0px;
-    & h4{
-        margin-top: 0;
-        text-align: left;
-    }
-}
+// .optionsPanel.closed {
+//   transform: translateX(-50%);
+//   z-index: 0;
+//   animation: card-motion .1s ease-in-out;
+// }
+
+// .panel-actions button{
+//     width: 100%;
+//     border-radius: 99px;
+//     color: #000000;
+//     background-image: linear-gradient(320deg, #FECC00 0%, #FECC00 100%);
+//     &:hover {
+//       background-image: linear-gradient(320deg, #FECC00 0%, #ffdd57 100%);
+//     }
+// }
+// .option-section{
+//     margin-bottom: 0px;
+//     & h4{
+//         margin-top: 0;
+//         text-align: left;
+//     }
+// }
 
 

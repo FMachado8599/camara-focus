@@ -1,0 +1,85 @@
+.main-components-container {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.genLayout {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+
+  align-items: flex-start;
+  position: relative;
+
+  /* Cada pareja ocupa su mini-grid */
+  margin-bottom: 2rem;
+}
+
+.mainCard {
+  min-width: 280px;
+  max-width: 350px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+
+.optionsPanel {
+  width: 250px;
+  background: #1a1a1a;
+  padding: 1.5rem;
+  border-radius: 1.5rem;
+
+  box-shadow: 0px 15px 40px rgba(0,0,0,0.35);
+
+  transition: transform .35s cubic-bezier(.4,0,.2,1);
+}
+
+
+/* MAIN CARD */
+.genLayout.closed .mainCard {
+  transform: translateX(50%);
+}
+
+.genLayout.open .mainCard {
+  transform: translateX(0);
+}
+
+/* PANEL */
+.optionsPanel {
+  transform: translateX(0);
+}
+
+.optionsPanel.closed {
+  transform: translateX(-50%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.optionsPanel.open {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+
+@media (max-width: 768px) {
+  .main-components-container {
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .genLayout {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .optionsPanel,
+  .mainCard {
+    transform: none !important;
+  }
+}

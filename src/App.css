@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=League+Spartan:wght@100..900&display=swap');
+
+@import "./styles/_mixins.scss";
+
 *{
     box-sizing: border-box;
 }
@@ -56,4 +59,3 @@ main .credits{
 .read-the-docs {
   color: #888;
 }
-
