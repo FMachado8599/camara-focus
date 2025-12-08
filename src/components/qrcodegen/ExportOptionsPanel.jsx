@@ -11,7 +11,7 @@ export default function ExportOptionsPanel({
 }) {
   const handleSave = () => {
     console.log("Opciones guardadas:", options);
-    isOpen=true;
+    isOpen=false;
     showToast("Opciones guardadas");
   };
 

@@ -10,8 +10,8 @@ import OptionsPanel from "./components/barcodegen/OptionsPanel";
 import ExportOptionsPanel from "./components/qrcodegen/ExportOptionsPanel";
 
 function App() {
-  const [isQRPanelOpen, setIsQRPanelOpen] = useState(false);
-  const [isBarPanelOpen, setIsBarPanelOpen] = useState(false);
+  const [isQRPanelOpen, setIsQRPanelOpen] = useState(true);
+  const [isBarPanelOpen, setIsBarPanelOpen] = useState(true);
 
   const [exportOptions, setExportOptions] = useState({
     format: "png",
