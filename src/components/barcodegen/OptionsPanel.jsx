@@ -1,4 +1,5 @@
 import "./_barcodeOptionsPanel.scss";
+import CardOption from "../qrcodegen/exportOptionsModal/cardOption";
 
 export default function BarcodeOptionsPanel({
   isOpen,
@@ -17,20 +18,26 @@ export default function BarcodeOptionsPanel({
       {/* FORMATO */}
       <div className="option-section">
         <h4>Formato</h4>
-        <select
-          value={options.format}
-          onChange={(e) =>
-            setOptions((prev) => ({
-              ...prev,
-              format: e.target.value,
-            }))
-          }
-        >
-          <option value="svg">SVG</option>
-          <option value="png">PNG</option>
-        </select>
-      </div>
+        <div className="option-grid">
+          <CardOption
+            label="SVG"
+            value="svg"
+            current={options.format}
+            onChange={(val) =>
+              setOptions((prev) => ({ ...prev, format: val }))
+            }
+          />
+          <CardOption
+            label="PNG"
+            value="png"
+            current={options.format}
+            onChange={(val) =>
+              setOptions((prev) => ({ ...prev, format: val }))
+            }
+          />
+        </div>
 
+      </div>
       {/* PNG SCALE */}
       {options.format === "png" && (
         <div className="option-section">
@@ -61,6 +68,7 @@ export default function BarcodeOptionsPanel({
           onChange={(e) =>
             setOptions((prev) => ({ ...prev, width: Number(e.target.value) }))
           }
+          className="number"
         />
       </div>
 
@@ -80,7 +88,7 @@ export default function BarcodeOptionsPanel({
 
       {/* DISPLAY VALUE */}
       <div className="option-section toggle">
-        <label>
+        <label className="show-number" >
           <input
             type="checkbox"
             checked={options.displayValue}
@@ -90,6 +98,7 @@ export default function BarcodeOptionsPanel({
                 displayValue: e.target.checked,
               }))
             }
+            className="checkbox"
           />
           Mostrar números
         </label>
@@ -98,40 +107,57 @@ export default function BarcodeOptionsPanel({
       {/* COLOR LINEA */}
       <div className="option-section">
         <h4>Color de línea</h4>
-        <input
-          type="color"
-          value={options.lineColor}
-          onChange={(e) =>
-            setOptions((prev) => ({ ...prev, lineColor: e.target.value }))
-          }
-        />
+        <div className="color-card">
+          <input
+            type="color"
+            value={options.lineColor}
+            oninput="colorhex.value=value"
+            onChange={(e) =>
+              setOptions(prev => ({
+                ...prev,
+                lineColor: e.target.value.toUpperCase()
+              }))
+            }
+          />
+          <output id="colorhex">{options.lineColor.toUpperCase()}</output>
+        </div>
       </div>
 
       {/* BACKGROUND */}
       <div className="option-section">
         <h4>Fondo</h4>
-        <input
+            <div className="color-card">
+                      <input
           type="color"
+          oninput="colorhex.value=value"
           value={options.backgroundColor}
-          onChange={(e) =>
-            setOptions((prev) => ({ ...prev, backgroundColor: e.target.value }))
-          }
+            onChange={(e) =>
+              setOptions(prev => ({
+                ...prev,
+                backgroundColor: e.target.value.toUpperCase()
+              }))
+            }
         />
+        <output id="colorhex">{options.backgroundColor.toUpperCase()}</output>
+            </div>
       </div>
 
       {/* FONT / WORKAROUND */}
       <div className="option-section">
         <h4>Fuente de números</h4>
-        <select
-          value={options.fontFamily}
-          onChange={(e) =>
-            setOptions((prev) => ({ ...prev, fontFamily: e.target.value }))
-          }
-        >
-          <option value="inter">Inter</option>
-          <option value="roboto">Roboto</option>
-          <option value="monospace">Monospace</option>
-        </select>
+        <div className="custom-select">
+          <select
+            value={options.fontFamily}
+            onChange={(e) =>
+              setOptions((prev) => ({ ...prev, fontFamily: e.target.value }))
+            }
+          >
+            <option value="inter">Inter</option>
+            <option value="roboto">Roboto</option>
+            <option value="monospace">Monospace</option>
+          </select>
+        </div>
+
 
         <input
           type="number"

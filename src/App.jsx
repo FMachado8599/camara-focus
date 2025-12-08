@@ -22,7 +22,7 @@ function App() {
     width: 2,
     height: 90,
     displayValue: true,
-    lineColor: "#000000",
+    lineColor: "#ffffff",
     backgroundColor: "transparent",
     fontFamily: "inter", // workaround
     fontSize: 14,
