@@ -113,7 +113,6 @@ export default function BarCodeGen({ togglePanel, showToast, options }) {
             onClick={togglePanel}
           />
         </header>
-
         <div className="barcode-preview">
           {!generatedValue && !loading && (
             <svg className="preview-placeholder" ref={placeholderRef}></svg>
@@ -123,25 +122,24 @@ export default function BarCodeGen({ togglePanel, showToast, options }) {
 
           {generatedValue && <svg ref={svgRef} className="barcode-svg"></svg>}
         </div>
-
         <input
           type="text"
           value={inputValue}
           placeholder="5901234123457"
           onChange={(e) => setInputValue(e.target.value)}
         />
-
-        <button className="generar-button" onClick={handleGenerate}>
-          Generar
-        </button>
-
-        <button
-          className={generatedValue ? "descargar-button" : "disabled-button"}
-          disabled={!generatedValue}
-          onClick={handleDownload}
-        >
-          Descargar
-        </button>
+        <div>
+          <button className="generar-button" onClick={handleGenerate}>
+            Generar
+          </button>
+          <button
+            className={generatedValue ? "descargar-button" : "disabled-button"}
+            disabled={!generatedValue}
+            onClick={handleDownload}
+          >
+            Descargar
+          </button>
+        </div>
       </div>
     </div>
   );

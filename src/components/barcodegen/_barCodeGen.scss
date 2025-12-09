@@ -24,7 +24,10 @@
 
 .barcode-card {
   @include neo-card(250px);
-
+  height: 470px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   input {
     @include control-input();
     &::placeholder {

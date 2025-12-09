@@ -1,5 +1,6 @@
 import "./_barcodeOptionsPanel.scss";
 import CardOption from "../qrcodegen/exportOptionsModal/cardOption";
+import { Copy, ClipboardPaste } from "lucide-react";
 
 export default function BarcodeOptionsPanel({
   isOpen,
@@ -9,6 +10,26 @@ export default function BarcodeOptionsPanel({
 }) {
   const handleSave = () => {
     showToast("Opciones guardadas");
+  };
+
+  const handleCopyBg = () => {
+  navigator.clipboard.writeText(options.backgroundColor);
+  showToast("Color copiado al portapapeles");
+  };
+
+  const handlePasteBg = async () => {
+    const text = await navigator.clipboard.readText();
+
+    // Validar que es un hex correcto tipo #FFFFFF o FFFFFF
+    if (/^#?[0-9A-Fa-f]{6}$/.test(text)) {
+      const formatted = text.startsWith("#") ? text : `#${text}`;
+      setOptions(prev => ({
+        ...prev,
+        backgroundColor: formatted.toUpperCase()
+      }));
+    } else {
+      console.warn("Valor pegado no es un HEX válido:", text);
+    }
   };
 
   return (
@@ -106,7 +127,7 @@ export default function BarcodeOptionsPanel({
 
       {/* COLOR LINEA */}
       <div className="option-section">
-        <h4>Color de línea</h4>
+        <h4>Línea</h4>
         <div className="color-card">
           <input
             type="color"
@@ -119,27 +140,39 @@ export default function BarcodeOptionsPanel({
               }))
             }
           />
-          <output id="colorhex">{options.lineColor.toUpperCase()}</output>
+          <div className="color-info-bar">
+            <output id="colorhex">{options.lineColor.toUpperCase()}</output>
+            <div className="color-info-tools">
+              <Copy className="icon" size={14} onClick={handleCopyBg}/>
+              <ClipboardPaste className="icon" size={14} onClick={handlePasteBg}/>
+            </div>            
+          </div>
         </div>
       </div>
 
       {/* BACKGROUND */}
       <div className="option-section">
         <h4>Fondo</h4>
-            <div className="color-card">
-                      <input
-          type="color"
-          oninput="colorhex.value=value"
-          value={options.backgroundColor}
+        <div className="color-card">
+          <input
+            type="color"
+            value={options.backgroundColor}
             onChange={(e) =>
               setOptions(prev => ({
                 ...prev,
                 backgroundColor: e.target.value.toUpperCase()
               }))
             }
-        />
-        <output id="colorhex">{options.backgroundColor.toUpperCase()}</output>
-            </div>
+          />
+          <div className="color-info-bar">
+            <output id="colorhex">{options.backgroundColor.toUpperCase()}</output>
+            <div className="color-info-tools">
+              <Copy className="icon" size={14} onClick={handleCopyBg}/>
+              <ClipboardPaste className="icon" size={14} onClick={handlePasteBg}/>
+            </div>            
+          </div>
+
+        </div>
       </div>
 
       {/* FONT / WORKAROUND */}
