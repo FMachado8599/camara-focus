@@ -13,8 +13,12 @@ export default function BarcodeOptionsPanel({
   };
 
   const handleCopyBg = () => {
-  navigator.clipboard.writeText(options.backgroundColor);
-  showToast("Color copiado al portapapeles");
+    navigator.clipboard.writeText(options.backgroundColor);
+    showToast("Color de fondo copiado");
+  };
+  const handleCopyLine = () => {
+    navigator.clipboard.writeText(options.lineColor);
+    showToast("Color de línea copiado");
   };
 
   const handlePasteBg = async () => {
@@ -31,6 +35,21 @@ export default function BarcodeOptionsPanel({
       console.warn("Valor pegado no es un HEX válido:", text);
     }
   };
+
+  const handlePasteLine = async () => {
+  const text = await navigator.clipboard.readText();
+
+    if (/^#?[0-9A-Fa-f]{6}$/.test(text)) {
+      const formatted = text.startsWith("#") ? text : `#${text}`;
+      setOptions(prev => ({
+        ...prev,
+        lineColor: formatted.toUpperCase()
+      }));
+    } else {
+      showToast("Valor no es HEX válido", "error");
+    }
+  };
+
 
   return (
     <aside className={`optionsPanel ${isOpen ? "open" : "closed"}`}>
@@ -143,8 +162,8 @@ export default function BarcodeOptionsPanel({
           <div className="color-info-bar">
             <output id="colorhex">{options.lineColor.toUpperCase()}</output>
             <div className="color-info-tools">
-              <Copy className="icon" size={14} onClick={handleCopyBg}/>
-              <ClipboardPaste className="icon" size={14} onClick={handlePasteBg}/>
+              <Copy className="icon" size={14} onClick={handleCopyLine}/>
+              <ClipboardPaste className="icon" size={14} onClick={handlePasteLine}/>
             </div>            
           </div>
         </div>
