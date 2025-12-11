@@ -1,13 +1,19 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { QRCodeSVG } from "qrcode.react";
 import "./qrcodegen.scss";
-import { handleDownload } from "../../utils/download/qrGenUtils";
+import { handleDownload, serializeSvg, generateQrId} from "../../utils/download/qrGenUtils";
 import { Settings } from "lucide-react";
+import { db } from "../../lib/firebase";
+import { doc, setDoc } from "firebase/firestore";
 
-const QRGen = ({ togglePanel, exportOptions, setExportOptions }) => {
+
+const QRGen = ({ togglePanel, exportOptions, setExportOptions, showToast }) => {
   const [text, setText] = useState("");
   const [showQR, setShowQR] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [name, setName] = useState("");
+  const svgRef = useRef(null);
+
 
   const handleGenerate = async () => {
     if (text.trim() === "") {
@@ -22,6 +28,26 @@ const QRGen = ({ togglePanel, exportOptions, setExportOptions }) => {
     setShowQR(true);
   };
 
+  const handleSaveQR = async () => {
+    if (!showQR) return alert("Generá el QR primero pa");
+
+    const svgString = serializeSvg(svgRef.current);
+    console.log("SVG GUARDADO:", svgString.slice(0, 300));
+    const id = generateQrId();
+
+    await setDoc(doc(db, "qrs", id), {
+      name: name || "Nuevo QR",
+      type: "url",
+      destination: text,
+      svg: svgString,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
+
+    showToast("Código QR Guardado Correctamente")
+  };
+
+
   return (
     <div className="qrGen">
       <div className="qr-card">
@@ -31,6 +57,12 @@ const QRGen = ({ togglePanel, exportOptions, setExportOptions }) => {
         <span className="option-menu">
           <Settings size={18} onClick={togglePanel} />
         </span>
+        <input
+          type="text"
+          placeholder="Nombre del QR"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
         <div className="qr-code-container">
           {!loading && !showQR && text.trim() === "" && (
             <div style={{ opacity: 0.1 }}>
@@ -48,6 +80,7 @@ const QRGen = ({ togglePanel, exportOptions, setExportOptions }) => {
           {showQR && (
             <div>
               <QRCodeSVG
+                ref={svgRef}
                 value={text}
                 bgColor="transparent"
                 fgColor="#ffffff"
@@ -74,6 +107,13 @@ const QRGen = ({ togglePanel, exportOptions, setExportOptions }) => {
           disabled={!showQR}
         >
           Descargar
+        </button>
+        <button
+          className={showQR ? "descargar-button" : "disabled-button"}
+          onClick={handleSaveQR}
+          disabled={!showQR}
+        >
+          Guardar QR
         </button>
       </div>
     </div>

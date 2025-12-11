@@ -48,7 +48,7 @@ function App() {
   };
 
   return (
-    <main>
+    <main className="home">
       <div>
         <a href="https://www.camaratbwa.com/" target="_blank">
           <img src={camaraLogo} className="logo" alt="Vite logo" />
@@ -64,6 +64,7 @@ function App() {
               togglePanel={toggleQRPanel}
               exportOptions={exportOptions}
               setExportOptions={setExportOptions}
+              showToast={showToast}
             />
           </div>
           <ExportOptionsPanel

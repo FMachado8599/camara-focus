@@ -151,7 +151,7 @@ export default function BarcodeOptionsPanel({
           <input
             type="color"
             value={options.lineColor}
-            oninput="colorhex.value=value"
+            onInput="colorhex.value=value"
             onChange={(e) =>
               setOptions(prev => ({
                 ...prev,

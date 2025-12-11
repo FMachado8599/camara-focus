@@ -1,0 +1,22 @@
+{
+  "id": "abc001",
+  "name": "QR prueba",
+  "type": "url",
+
+  "destination": "https://google.com",
+  "payload": {
+    "url": "https://google.com"
+  },
+
+  "style": {
+    "color": "#000000",
+    "background": "#ffffff",
+    "eyeStyle": "square",
+    "dotStyle": "square",
+    "padding": 12,
+    "logoUrl": null
+  },
+
+  "createdAt": 1733857200000,
+  "updatedAt": 1733857200000
+}

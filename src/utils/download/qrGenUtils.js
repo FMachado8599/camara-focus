@@ -1,3 +1,5 @@
+import { nanoid } from "nanoid";
+
 export function handleDownload(options) {
 
   const { format, size, margin } = options
@@ -83,4 +85,14 @@ function downloadPNG(svgString, size) {
   img.src = url;
 }
 
+export function serializeSvg(svgElement) {
+  if (!svgElement) throw new Error("SVG element is null");
+
+  const serializer = new XMLSerializer();
+  return serializer.serializeToString(svgElement);
+}
+
+export function generateQrId() {
+  return nanoid(8);
+}
 

@@ -1,0 +1,257 @@
+// .store-page {
+//   padding: 20px;
+// }
+
+// .store-topbar {
+//   margin-bottom: 20px;
+// }
+
+// .topbar-header {
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+// }
+
+// .search-section {
+//   position: relative;
+//   max-width: 350px;
+//   margin-top: 10px;
+// }
+
+// .search-icon {
+//   position: absolute;
+//   left: 10px;
+//   top: 50%;
+//   transform: translateY(-50%);
+// }
+
+// .search-input {
+//   padding-left: 30px;
+// }
+
+// .store-grid {
+//   display: grid;
+//   grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+//   gap: 20px;
+// }
+
+// .qr-card {
+//   padding: 15px;
+//   border: 1px solid #ddd;
+//   border-radius: 14px;
+// }
+
+// .qr-thumb-svg {
+//   width: 100%;
+//   height: 100%;
+//   padding: 10px;
+//   background: rgba(255,255,255,0.05);
+//   border-radius: 16px;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+
+//   svg {
+//     width: 100%;
+//     height: auto;
+//   }
+// }
+
+
+// .qr-name {
+//   font-weight: bold;
+//   margin-top: 10px;
+// }
+
+// .qr-type {
+//   font-size: 12px;
+//   color: #4a77ff;
+//   margin-bottom: 4px;
+// }
+
+// .qr-dest {
+//   font-size: 12px;
+//   color: #888;
+//   margin-bottom: 6px;
+// }
+
+// .qr-date {
+//   font-size: 11px;
+//   color: #aaa;
+// }
+
+// .qr-actions {
+//   display: flex;
+//   gap: 8px;
+//   margin-top: 10px;
+// }
+
+// .dropdown-trigger {
+//   padding: 4px 10px;
+// }
+
+$bg: #0f0f0f;
+$card: #1a1a1a;
+$accent: #FECC00;
+$text: #fff;
+$muted: #ffffff33;
+$border: rgba(255,255,255,0.08);
+
+.store-page {
+  min-height: 100vh;
+  background: $bg;
+  padding-bottom: 3rem;
+  width: 100%;
+}
+
+.store-topbar {
+  background: $card;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid $border;
+  border-radius: 0 0 1.5rem 1.5rem;
+  width: 100%;
+  &.neumorphic-flat {
+    box-shadow: 
+      inset 2px 2px 4px rgba(0,0,0,0.5),
+      inset -2px -2px 4px rgba(255,255,255,0.05),
+      4px 4px 12px rgba(0,0,0,0.3),
+      -4px -4px 12px rgba(255,255,255,0.05);
+  }
+
+  .topbar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    .topbar-title {
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: $text;
+    }
+  }
+
+  .search-section {
+    position: relative;
+    max-width: 400px;
+
+    .search-icon {
+      position: absolute;
+      top: 50%;
+      left: 1rem;
+      transform: translateY(-50%);
+      opacity: 0.5;
+    }
+
+    .search-input {
+      padding-left: 2.8rem;
+      border-radius: 1.5rem;
+      background: $card !important;
+      color: $text;
+
+      &.neumorphic-inset {
+        box-shadow: inset 4px 4px 8px rgba(0,0,0,0.6),
+                    inset -4px -4px 8px rgba(255,255,255,0.05);
+      }
+    }
+  }
+}
+
+.store-grid {
+  padding: 2rem;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.qr-card {
+  padding: 1.5rem;
+  border-radius: 1.7rem;
+  background: $card;
+  transition: box-shadow 0.3s;
+
+  &.neumorphic {
+    box-shadow:
+      6px 6px 16px rgba(0,0,0,0.5),
+      -6px -6px 16px rgba(255,255,255,0.05);
+  }
+
+  &:hover {
+    box-shadow:
+      8px 8px 24px rgba(0,0,0,0.6),
+      -8px -8px 24px rgba(255,255,255,0.06);
+  }
+
+  .qr-thumb {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+
+    .qr-thumb-svg {
+      width: 180px;
+      height: 180px;
+      padding: 1rem;
+      border-radius: 1.2rem;
+      background: $bg;
+
+      &.neumorphic-inset {
+        box-shadow: 
+          inset 6px 6px 14px rgba(0,0,0,0.7),
+          inset -6px -6px 14px rgba(255,255,255,0.04);
+      }
+    }
+  }
+
+  .qr-name {
+    font-weight: 600;
+    color: $text;
+    margin: 0.5rem 0;
+  }
+
+  .qr-type {
+    font-size: 0.8rem;
+    color: $accent;
+    margin-bottom: 0.5rem;
+  }
+
+  .qr-dest {
+    font-size: 0.75rem;
+    opacity: 0.7;
+    padding: 0.6rem 1rem;
+    border-radius: 1rem;
+
+    &.neumorphic-badge {
+      background: $muted;
+    }
+  }
+
+  .qr-date {
+    font-size: 0.7rem;
+    opacity: 0.6;
+  }
+
+  .qr-actions {
+    margin-top: 1rem;
+    display: flex;
+    gap: 0.7rem;
+
+    .qr-edit-btn,
+    .dropdown-trigger {
+      flex: 1;
+      border-radius: 1rem;
+      background: $card;
+      color: $text;
+
+      &.neumorphic-flat {
+        box-shadow: 
+          3px 3px 8px rgba(0,0,0,0.5),
+          -3px -3px 8px rgba(255,255,255,0.05);
+      }
+    }
+
+    .danger {
+      color: #ff4d4d;
+    }
+  }
+}
