@@ -16,18 +16,20 @@ export default function BarcodeGeneratorBlock() {
     pngScale: 3,
   });
 
-  useEffect(() => {
-    const t = setTimeout(() => setOptionsOpen(false), 6000);
-    return () => clearTimeout(t);
-  }, []);
+  const togglePanel = () => {
+    setOptionsOpen(prev => !prev);
+  };
 
   return (
     <>
       <div className="mainCard fade">
-        <BarCodeGen options={options} />
+        <BarCodeGen
+          options={options}
+          togglePanel={togglePanel}
+        />
       </div>
 
-      <aside className={`optionsPanel ${optionsOpen ? "open" : "closed"}`}>
+      <aside className={`optionsPanelContainer ${optionsOpen ? "open" : "closed"}`}>
         <BarcodeOptionsPanel options={options} setOptions={setOptions} />
       </aside>
     </>

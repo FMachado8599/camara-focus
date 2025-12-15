@@ -62,21 +62,18 @@ export default function BarCodeGen({ togglePanel, showToast, options }) {
   useEffect(() => {
     if (!generatedValue) return;
 
-    try {
-      JsBarcode(svgRef.current, generatedValue, {
-        format: "ean13",
-        lineColor: options.lineColor,
-        background: options.backgroundColor,
-        width: options.width,
-        height: options.height,
-        displayValue: options.displayValue,
-        fontSize: options.fontSize,
-        font: options.fontFamily, // JsBarcode solo acepta nombres básicos
-      });
-    } catch (err) {
-      console.warn("Código inválido:", err);
-    }
-  }, [generatedValue]);
+    JsBarcode(svgRef.current, generatedValue, {
+      format: "ean13",
+      lineColor: options.lineColor,
+      background: options.backgroundColor,
+      width: options.width,
+      height: options.height,
+      displayValue: options.displayValue,
+      fontSize: options.fontSize,
+      font: options.fontFamily,
+    });
+  }, [generatedValue, options]);
+
 
   useEffect(() => {
     if (!generatedValue && placeholderRef.current) {

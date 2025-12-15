@@ -16,7 +16,7 @@ export default function ExportOptionsPanel({
   };
 
   return (
-    <aside className={`optionsPanel ${isOpen ? "open" : "closed"}`}>
+    <div>
       <h3>Opciones de exportación</h3>
 
       <div className="option-section">
@@ -103,6 +103,6 @@ export default function ExportOptionsPanel({
       <div className="panel-actions">
         <button onClick={handleSave}>Guardar</button>
       </div>
-    </aside>
+    </div>
   );
 }

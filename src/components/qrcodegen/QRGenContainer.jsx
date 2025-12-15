@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import QRGen from "../qrcodegen/QRGen";
-import ExportOptionsPanel from "../qrcodegen/ExportOptionsPanel";
+import OptionsPanel from "./OptionsPanel";
 
 export default function QRGeneratorBlock() {
   const [optionsOpen, setOptionsOpen] = useState(true);
@@ -10,11 +10,9 @@ export default function QRGeneratorBlock() {
     margin: 0,
   });
 
-  // opcional: auto-hide
-  useEffect(() => {
-    const t = setTimeout(() => setOptionsOpen(false), 6000);
-    return () => clearTimeout(t);
-  }, []);
+  const togglePanel = () => {
+    setOptionsOpen(prev => !prev);
+  };
 
   return (
     <>
@@ -22,11 +20,12 @@ export default function QRGeneratorBlock() {
         <QRGen
           exportOptions={exportOptions}
           setExportOptions={setExportOptions}
+          togglePanel={togglePanel}
         />
       </div>
 
       <aside className={`optionsPanel ${optionsOpen ? "open" : "closed"}`}>
-        <ExportOptionsPanel
+        <OptionsPanel
           options={exportOptions}
           setOptions={setExportOptions}
         />
