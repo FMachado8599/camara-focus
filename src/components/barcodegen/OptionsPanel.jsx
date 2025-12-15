@@ -27,9 +27,9 @@ export default function BarcodeOptionsPanel({
     // Validar que es un hex correcto tipo #FFFFFF o FFFFFF
     if (/^#?[0-9A-Fa-f]{6}$/.test(text)) {
       const formatted = text.startsWith("#") ? text : `#${text}`;
-      setOptions(prev => ({
+      setOptions((prev) => ({
         ...prev,
-        backgroundColor: formatted.toUpperCase()
+        backgroundColor: formatted.toUpperCase(),
       }));
     } else {
       console.warn("Valor pegado no es un HEX válido:", text);
@@ -37,19 +37,18 @@ export default function BarcodeOptionsPanel({
   };
 
   const handlePasteLine = async () => {
-  const text = await navigator.clipboard.readText();
+    const text = await navigator.clipboard.readText();
 
     if (/^#?[0-9A-Fa-f]{6}$/.test(text)) {
       const formatted = text.startsWith("#") ? text : `#${text}`;
-      setOptions(prev => ({
+      setOptions((prev) => ({
         ...prev,
-        lineColor: formatted.toUpperCase()
+        lineColor: formatted.toUpperCase(),
       }));
     } else {
       showToast("Valor no es HEX válido", "error");
     }
   };
-
 
   return (
     <aside className={`optionsPanel ${isOpen ? "open" : "closed"}`}>
@@ -63,20 +62,15 @@ export default function BarcodeOptionsPanel({
             label="SVG"
             value="svg"
             current={options.format}
-            onChange={(val) =>
-              setOptions((prev) => ({ ...prev, format: val }))
-            }
+            onChange={(val) => setOptions((prev) => ({ ...prev, format: val }))}
           />
           <CardOption
             label="PNG"
             value="png"
             current={options.format}
-            onChange={(val) =>
-              setOptions((prev) => ({ ...prev, format: val }))
-            }
+            onChange={(val) => setOptions((prev) => ({ ...prev, format: val }))}
           />
         </div>
-
       </div>
       {/* PNG SCALE */}
       {options.format === "png" && (
@@ -128,7 +122,7 @@ export default function BarcodeOptionsPanel({
 
       {/* DISPLAY VALUE */}
       <div className="option-section toggle">
-        <label className="show-number" >
+        <label className="show-number">
           <input
             type="checkbox"
             checked={options.displayValue}
@@ -151,20 +145,23 @@ export default function BarcodeOptionsPanel({
           <input
             type="color"
             value={options.lineColor}
-            onInput="colorhex.value=value"
             onChange={(e) =>
-              setOptions(prev => ({
+              setOptions((prev) => ({
                 ...prev,
-                lineColor: e.target.value.toUpperCase()
+                lineColor: e.target.value.toUpperCase(),
               }))
             }
           />
           <div className="color-info-bar">
             <output id="colorhex">{options.lineColor.toUpperCase()}</output>
             <div className="color-info-tools">
-              <Copy className="icon" size={14} onClick={handleCopyLine}/>
-              <ClipboardPaste className="icon" size={14} onClick={handlePasteLine}/>
-            </div>            
+              <Copy className="icon" size={14} onClick={handleCopyLine} />
+              <ClipboardPaste
+                className="icon"
+                size={14}
+                onClick={handlePasteLine}
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -177,20 +174,25 @@ export default function BarcodeOptionsPanel({
             type="color"
             value={options.backgroundColor}
             onChange={(e) =>
-              setOptions(prev => ({
+              setOptions((prev) => ({
                 ...prev,
-                backgroundColor: e.target.value.toUpperCase()
+                backgroundColor: e.target.value.toUpperCase(),
               }))
             }
           />
           <div className="color-info-bar">
-            <output id="colorhex">{options.backgroundColor.toUpperCase()}</output>
+            <output id="colorhex">
+              {options.backgroundColor.toUpperCase()}
+            </output>
             <div className="color-info-tools">
-              <Copy className="icon" size={14} onClick={handleCopyBg}/>
-              <ClipboardPaste className="icon" size={14} onClick={handlePasteBg}/>
-            </div>            
+              <Copy className="icon" size={14} onClick={handleCopyBg} />
+              <ClipboardPaste
+                className="icon"
+                size={14}
+                onClick={handlePasteBg}
+              />
+            </div>
           </div>
-
         </div>
       </div>
 
@@ -209,7 +211,6 @@ export default function BarcodeOptionsPanel({
             <option value="monospace">Monospace</option>
           </select>
         </div>
-
 
         <input
           type="number"

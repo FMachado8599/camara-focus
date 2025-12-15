@@ -1,4 +1,4 @@
-@import "./mixins";
+@use "./_mixins.scss" as *;
 
 .genLayout {
   display: flex;

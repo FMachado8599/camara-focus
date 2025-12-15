@@ -1,4 +1,4 @@
-@import "../../styles/mixins";
+@use "../../styles/_mixins.scss" as *;
 
 .barcodeGen {
   width: 100%;

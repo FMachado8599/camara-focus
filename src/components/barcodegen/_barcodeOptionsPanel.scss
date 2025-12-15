@@ -1,4 +1,4 @@
-@import  "../../styles/mixins";
+@use  "../../styles/_mixins.scss" as *;
 
 $height: 40px;
 $radius: 8px;

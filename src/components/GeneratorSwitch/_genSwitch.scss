@@ -1,0 +1,34 @@
+.genSwitch {
+  display: inline-flex;
+  overflow: hidden;
+  border: 1px solid #2e2e2e;
+  border-radius: 10px;
+  background: #0f0f0f;
+}
+
+.genSwitch__btn {
+  all: unset;
+  cursor: pointer;
+
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #9ca3af;
+  transition: background-color 0.2s ease, color 0.2s ease;
+
+  &:hover {
+    background: #1d1d1d;
+    color: #ffffff;
+  }
+
+  &.active {
+    background: #ffffff;
+    color: #000000;
+  }
+
+  svg {
+    pointer-events: none;
+  }
+}
