@@ -84,7 +84,10 @@
     }
   }
   & input {
-    @include control-input(); // mismo max-width 186px por defecto
+    @include control-input();
+    // &.qr-name{
+    //   margin-bottom: 1rem
+    // }
   }
 
   & .generar-button {

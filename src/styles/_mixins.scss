@@ -1,7 +1,10 @@
 // Mixins globales para la app TBWA
-
+@mixin button{
+  margin: .6rem 0px;
+}
 // CARD BASE NEOMÓRFICA
 @mixin neo-card($maxWidth: 250px) {
+  @include button;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -37,6 +40,7 @@
 
 // BOTÓN BASE TBWA
 @mixin btn-base {
+  @include button;
   width: 100%;
   padding: 0.618rem 1.618rem;
   font-family: 'Inter', sans-serif;
@@ -54,6 +58,7 @@
 
 // INPUT BASE (el del QR)
 @mixin control-input($maxWidth: 186px) {
+  @include button;
   background-color: transparent;
   border-radius: 1rem;
   padding: 0.618rem 1.618rem;
@@ -75,6 +80,7 @@
 
 // BOTÓN BASE (lo común a todos tus botones)
 @mixin btn-base($margin-top: 0, $margin-bottom: 0) {
+  @include button;
   width: 100%;
   background-color: transparent;
   padding: 0.618rem 1.618rem;
@@ -93,6 +99,7 @@
 
 // INPUT BASE (el del QR)
 @mixin control-input($maxWidth: 186px) {
+  @include button;
   background-color: transparent;
   border-radius: 1rem;
   padding: 0.618rem 1.618rem;
@@ -114,6 +121,7 @@
 
 // BOTÓN BASE (lo común a todos tus botones)
 @mixin btn-base($margin-top: 0, $margin-bottom: 0) {
+  @include button;
   width: 100%;
   background-color: transparent;
   padding: 0.618rem 1.618rem;
@@ -125,13 +133,12 @@
     3px 3px 7px #080808,
     -3px -3px 7px #222222;
   font-weight: 700;
-  margin-top: $margin-top;
   margin-bottom: $margin-bottom;
   transition: all 0.3s ease-in-out;
 }
 
 // GENERAR (botón oscuro)
-@mixin btn-dark($margin-top: 1rem, $margin-bottom: 0.6rem) {
+@mixin btn-dark($margin-top: 0rem, $margin-bottom: 0.6rem) {
   @include btn-base($margin-top, $margin-bottom);
   background: #151515;
 

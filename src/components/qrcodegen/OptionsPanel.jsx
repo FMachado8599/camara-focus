@@ -2,13 +2,15 @@ import { useState } from "react";
 import "../../styles/exportOptionsPanel.scss"
 import CardOption from "./exportOptionsModal/cardOption";
 import ColorPicker from "./exportOptionsModal/ColorPicker";
+import { useToast } from "@/context/ToastContext"
 
 export default function ExportOptionsPanel({
   isOpen,
   options,
-  setOptions,
-  showToast
+  setOptions
 }) {
+    const { showToast } = useToast();
+
   const handleSave = () => {
     console.log("Opciones guardadas:", options);
     isOpen=false;
@@ -18,7 +20,6 @@ export default function ExportOptionsPanel({
   return (
     <div>
       <h3>Opciones de exportación</h3>
-
       <div className="option-section">
         <h4>Tamaño <span>(px)</span> </h4>
         <div className="option-grid">
@@ -35,7 +36,7 @@ export default function ExportOptionsPanel({
           ))}
         </div>
       </div>
-
+      
       <div className="option-section">
         <h4>Margen <span>(pt)</span></h4>
         <div className="option-grid">

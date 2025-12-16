@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import BarCodeGen from "./BarCodeGen";
 import BarcodeOptionsPanel from "./OptionsPanel";
 
-export default function BarcodeGeneratorBlock() {
+export default function BarcodeGenContainer() {
   const [optionsOpen, setOptionsOpen] = useState(true);
   const [options, setOptions] = useState({
     width: 2,
@@ -30,7 +30,10 @@ export default function BarcodeGeneratorBlock() {
       </div>
 
       <aside className={`optionsPanelContainer ${optionsOpen ? "open" : "closed"}`}>
-        <BarcodeOptionsPanel options={options} setOptions={setOptions} />
+        <BarcodeOptionsPanel
+          options={options}
+          setOptions={setOptions}
+        />
       </aside>
     </>
   );

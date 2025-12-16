@@ -9,13 +9,15 @@ import {
   calculateChecksum,
 } from "../../utils/barcodeUtils";
 import { downloadSVG, downloadPNG } from "../../utils/barcodeUtils";
+import { useToast } from "@/context/ToastContext";
 
-export default function BarCodeGen({ togglePanel, showToast, options }) {
+export default function BarCodeGen({ togglePanel, options }) {
   const svgRef = useRef(null);
   const [inputValue, setInputValue] = useState("");
   const [generatedValue, setGeneratedValue] = useState(null);
   const [loading, setLoading] = useState(false);
   const placeholderRef = useRef(null);
+  const { showToast } = useToast();
 
   const handleGenerate = async () => {
     const raw = inputValue.trim();

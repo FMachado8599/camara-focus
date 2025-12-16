@@ -5,19 +5,21 @@ import { handleDownload, serializeSvg, generateQrId} from "../../utils/download/
 import { Settings } from "lucide-react";
 import { db } from "../../lib/firebase";
 import { doc, setDoc } from "firebase/firestore";
+import { useToast } from "@/context/ToastContext"
 
-
-const QRGen = ({ togglePanel, exportOptions, setExportOptions, showToast }) => {
+const QRGen = ({ togglePanel, exportOptions, setExportOptions }) => {
   const [text, setText] = useState("");
   const [showQR, setShowQR] = useState(false);
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
   const svgRef = useRef(null);
+  const { showToast } = useToast();
 
 
   const handleGenerate = async () => {
+
     if (text.trim() === "") {
-      alert("Escribí algo papito");
+      showToast("Escribí algo wacho");
       return;
     }
 
@@ -29,7 +31,6 @@ const QRGen = ({ togglePanel, exportOptions, setExportOptions, showToast }) => {
   };
 
   const handleSaveQR = async () => {
-    if (!showQR) return alert("Generá el QR primero pa");
 
     const svgString = serializeSvg(svgRef.current);
     console.log("SVG GUARDADO:", svgString.slice(0, 300));
@@ -51,8 +52,6 @@ const QRGen = ({ togglePanel, exportOptions, setExportOptions, showToast }) => {
   return (
     <div className="qrGen">
       <div className="qr-card">
-        {" "}
-        {/* ← acá vive tu estilo original */}
         <h2>URL a QR</h2>
         <span className="option-menu">
           <Settings size={18} onClick={togglePanel} />
@@ -62,6 +61,7 @@ const QRGen = ({ togglePanel, exportOptions, setExportOptions, showToast }) => {
           placeholder="Nombre del QR"
           value={name}
           onChange={(e) => setName(e.target.value)}
+          className="qr-name"
         />
         <div className="qr-code-container">
           {!loading && !showQR && text.trim() === "" && (

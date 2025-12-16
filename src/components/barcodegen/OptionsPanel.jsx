@@ -1,13 +1,15 @@
 import "./_barcodeOptionsPanel.scss";
 import CardOption from "../qrcodegen/exportOptionsModal/cardOption";
 import { Copy, ClipboardPaste } from "lucide-react";
+import { useToast } from "@/context/ToastContext"
 
 export default function BarcodeOptionsPanel({
   isOpen,
   options,
   setOptions,
-  showToast,
 }) {
+  const { showToast } = useToast();
+
   const handleSave = () => {
     showToast("Opciones guardadas");
   };
