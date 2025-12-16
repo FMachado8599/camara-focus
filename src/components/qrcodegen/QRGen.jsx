@@ -50,7 +50,7 @@ const QRGen = ({ togglePanel, exportOptions, setExportOptions }) => {
 
 
   return (
-    <div className="qrGen">
+    <div className="qrGen mainCard fade">
       <div className="qr-card">
         <h2>URL a QR</h2>
         <span className="option-menu">

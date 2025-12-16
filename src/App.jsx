@@ -13,6 +13,7 @@ function App() {
 
   return (
     <main className="home">
+
       <div className="home-head">
         <a href="https://www.camaratbwa.com/" target="_blank">
           <img src={camaraLogo} className="logo" alt="Vite logo" />

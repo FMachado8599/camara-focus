@@ -1,9 +1,58 @@
 // Mixins globales para la app TBWA
-@mixin button{
-  margin: .6rem 0px;
+@mixin button {
+  margin: .6rem 0;
+}
+
+// BOTÓN BASE
+@mixin btn-base($margin-top: 0, $margin-bottom: .6rem) {
+  @include button;
+  width: 100%;
+  background-color: transparent;
+  padding: 0.618rem 1.618rem;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  border: 1px solid var(--border, #333);
+  border-radius: 37px;
+  box-shadow:
+    3px 3px 7px #080808,
+    -3px -3px 7px #222222;
+  font-weight: 700;
+  margin-top: $margin-top;
+  margin-bottom: $margin-bottom;
+  transition: all 0.3s ease-in-out;
+}
+
+// BOTÓN OSCURO
+@mixin btn-dark($margin-top: 0, $margin-bottom: 0.6rem) {
+  @include btn-base($margin-top, $margin-bottom);
+  background: #151515;
+
+  &:hover {
+    background-color: var(--bg-light-2);
+  }
+}
+
+// INPUT BASE
+@mixin control-input($maxWidth: 186px) {
+  @include button;
+  background: #1c1c1c;
+  border-radius: 1rem;
+  padding: 0.618rem 1.618rem;
+  border: 1px solid var(--border);
+  box-shadow:
+    inset 3px 3px 7px #080808,
+    inset -3px -3px 7px #222222;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  width: 100%;
+  max-width: $maxWidth;
+
+  &:focus-visible {
+    outline: 4px auto rgb(from #FECC00 r g b / 70%);
+  }
 }
 // CARD BASE NEOMÓRFICA
-@mixin neo-card($maxWidth: 250px) {
+@mixin neo-card($maxWidth: 300px) {
   @include button;
   display: flex;
   flex-direction: column;
@@ -36,105 +85,6 @@
 
     z-index: -1;
   }
-}
-
-// BOTÓN BASE TBWA
-@mixin btn-base {
-  @include button;
-  width: 100%;
-  padding: 0.618rem 1.618rem;
-  font-family: 'Inter', sans-serif;
-  font-weight: 700;
-  border-radius: 37px;
-  cursor: pointer;
-  border: 1px solid var(--border, #333);
-
-  box-shadow:
-    3px 3px 7px #080808,
-    -3px -3px 7px #222222;
-
-  transition: all 0.3s ease-in-out;
-}
-
-// INPUT BASE (el del QR)
-@mixin control-input($maxWidth: 186px) {
-  @include button;
-  background-color: transparent;
-  border-radius: 1rem;
-  padding: 0.618rem 1.618rem;
-  border: 1px solid var(--border);
-  background: #1c1c1c;
-  box-shadow:
-    inset 3px 3px 7px #080808,
-    inset -3px -3px 7px #222222;
-  font-family: 'Inter', sans-serif;
-  font-weight: 600;
-  width: 100%;
-  max-width: $maxWidth;
-
-  &:focus,
-  &:focus-visible {
-    outline: 4px auto rgb(from #FECC00 r g b / 70%);
-  }
-}
-
-// BOTÓN BASE (lo común a todos tus botones)
-@mixin btn-base($margin-top: 0, $margin-bottom: 0) {
-  @include button;
-  width: 100%;
-  background-color: transparent;
-  padding: 0.618rem 1.618rem;
-  font-family: 'Inter', sans-serif;
-  cursor: pointer;
-  border: 1px solid var(--border);
-  border-radius: 37px;
-  box-shadow:
-    3px 3px 7px #080808,
-    -3px -3px 7px #222222;
-  font-weight: 700;
-  margin-top: $margin-top;
-  margin-bottom: $margin-bottom;
-  transition: all 0.3s ease-in-out;
-}
-
-// INPUT BASE (el del QR)
-@mixin control-input($maxWidth: 186px) {
-  @include button;
-  background-color: transparent;
-  border-radius: 1rem;
-  padding: 0.618rem 1.618rem;
-  border: 1px solid var(--border);
-  background: #1c1c1c;
-  box-shadow:
-    inset 3px 3px 7px #080808,
-    inset -3px -3px 7px #222222;
-  font-family: 'Inter', sans-serif;
-  font-weight: 600;
-  width: 100%;
-  max-width: $maxWidth;
-
-  &:focus,
-  &:focus-visible {
-    outline: 4px auto rgb(from #FECC00 r g b / 70%);
-  }
-}
-
-// BOTÓN BASE (lo común a todos tus botones)
-@mixin btn-base($margin-top: 0, $margin-bottom: 0) {
-  @include button;
-  width: 100%;
-  background-color: transparent;
-  padding: 0.618rem 1.618rem;
-  font-family: 'Inter', sans-serif;
-  cursor: pointer;
-  border: 1px solid var(--border);
-  border-radius: 37px;
-  box-shadow:
-    3px 3px 7px #080808,
-    -3px -3px 7px #222222;
-  font-weight: 700;
-  margin-bottom: $margin-bottom;
-  transition: all 0.3s ease-in-out;
 }
 
 // GENERAR (botón oscuro)

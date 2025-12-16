@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import BarCodeGen from "./BarCodeGen";
 import BarcodeOptionsPanel from "./OptionsPanel";
 
@@ -22,19 +22,16 @@ export default function BarcodeGenContainer() {
 
   return (
     <>
-      <div className="mainCard fade">
-        <BarCodeGen
-          options={options}
-          togglePanel={togglePanel}
-        />
-      </div>
-
-      <aside className={`optionsPanelContainer ${optionsOpen ? "open" : "closed"}`}>
-        <BarcodeOptionsPanel
-          options={options}
-          setOptions={setOptions}
-        />
-      </aside>
+      <BarCodeGen
+        options={options}
+        togglePanel={togglePanel}
+        optionsOpen={optionsOpen}
+      />
+      <BarcodeOptionsPanel
+        options={options}
+        setOptions={setOptions}
+        optionsOpen={optionsOpen}
+      />
     </>
   );
 }

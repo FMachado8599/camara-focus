@@ -1,9 +1,10 @@
 @use "./_mixins.scss" as *;
+@use "./_optionsPanelInputs" as *;
 
 .genLayout {
   display: flex;
   position: relative;
-gap: 1rem;
+  gap: 1rem;
 }
 
 /* CARD PRINCIPAL */

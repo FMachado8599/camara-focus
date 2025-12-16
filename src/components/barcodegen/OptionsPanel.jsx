@@ -7,6 +7,7 @@ export default function BarcodeOptionsPanel({
   isOpen,
   options,
   setOptions,
+  optionsOpen
 }) {
   const { showToast } = useToast();
 
@@ -53,7 +54,7 @@ export default function BarcodeOptionsPanel({
   };
 
   return (
-    <div className="optionsPanel" >
+    <aside className={`optionsPanel ${optionsOpen ? "open" : "closed"}`} >
       <h3>Opciones de Código de Barra</h3>
       <div className="options-sections-container">
         {/* FORMATO */}
@@ -227,11 +228,10 @@ export default function BarcodeOptionsPanel({
             }
           />
         </div>
-
-        <div className="panel-actions">
-          <button onClick={handleSave}>Guardar</button>
-        </div>
       </div>
-    </div>
+      <div className="panel-actions">
+        <button onClick={handleSave}>Guardar</button>
+      </div>
+    </aside>
   );
 }

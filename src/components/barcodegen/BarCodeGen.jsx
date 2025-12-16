@@ -11,7 +11,7 @@ import {
 import { downloadSVG, downloadPNG } from "../../utils/barcodeUtils";
 import { useToast } from "@/context/ToastContext";
 
-export default function BarCodeGen({ togglePanel, options }) {
+export default function BarCodeGen({ togglePanel, options, optionsOpen }) {
   const svgRef = useRef(null);
   const [inputValue, setInputValue] = useState("");
   const [generatedValue, setGeneratedValue] = useState(null);
@@ -102,7 +102,7 @@ export default function BarCodeGen({ togglePanel, options }) {
   };
 
   return (
-    <div className="barcode-gen">
+    <div className="barcode-gen mainCard fade">
       <div className="barcode-card">
         <header className="barcode-header">
           <h2>Barcode Gen</h2>

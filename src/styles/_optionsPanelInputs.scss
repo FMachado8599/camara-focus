@@ -1,0 +1,156 @@
+@use "./_mixins.scss" as *;
+
+$height: 40px;
+$radius: 8px;
+
+.custom-select {
+    position: relative;
+    width: 100%;
+    border-radius: 12px;
+
+    & select {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        width: 100%;
+        background: transparent;
+        border: none;
+        color: #fff;
+        font-size: 14px;
+        cursor: pointer;
+        border-radius: 12px;
+        outline: none;
+        @include btn-dark;
+        margin-top: 0px;
+        font-size: 13px;
+        &:focus {
+            box-shadow:
+                0 0 0 2px rgba(254, 204, 0, 0.4),
+                0 0 0 4px rgba(254, 204, 0, 0.2);
+        }
+    }
+    &::after {
+        content: "▾";
+        /* o reemplazamos por ícono */
+        font-size: 14px;
+        color: #aaa;
+        position: absolute;
+        right: 16px;
+        top: 40%;
+        transform: translateY(-50%);
+        pointer-events: none;
+        transition: 0.15s ease-in-out;
+    }
+    &:hover::after {
+        color: #FECC00;
+    }
+}
+
+.color-card {
+background: #151515;
+display: grid;
+width: 100%;
+border-radius: 16px;
+box-shadow: 0 2px 4px #0001;
+transition: box-shadow .27s ease-in-out, margin .3s ease-in-out;
+padding: 8px;
+box-shadow: 3px 3px 7px #080808, -3px -3px 7px #222222;
+
+&:hover {
+    box-shadow: 5px 5px 10px #080808, -3px -3px 7px #222222;
+}
+
+& .color-info-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 8px 0px 4px 0px;
+
+    & output {
+    display: block;
+    background: #151515;
+    font-size: 14px;
+    padding: 0px 12px 0 12px;
+    line-height: 1em;
+    text-align: start;
+    font-weight: 600;
+
+    &:before {
+        content: 'HEXADECIMAL';
+        font-size: 10px;
+        font-weight: 400;
+        display: block;
+    }
+    }
+
+    & .color-info-tools {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    align-items: end;
+    padding-right: 8px;
+
+    & .icon {
+        &:hover {
+        color: #FECC00;
+        cursor: pointer;
+        }
+    }
+    }
+}
+}
+
+.show-number {
+display: flex;
+width: 100%;
+gap: 10px;
+font-size: 14px;
+
+& [type="checkbox"] {
+    @include checkbox;
+
+}
+}
+
+[type="number"] {
+@include control-input;
+max-width: 100%;
+font-size: 12px;
+}
+
+[type="color"] {
+display: inline-flex;
+vertical-align: bottom;
+border: none;
+border-radius: $radius;
+padding: 0;
+height: $height;
+width: 100%;
+cursor: pointer;
+
+&::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+&::-webkit-color-swatch {
+    border: 0;
+    border-radius: $radius $radius 0 0;
+}
+
+&::-moz-color-swatch {
+    border: 0;
+    border-radius: $radius $radius 0 0;
+}
+}
+
+
+
+.toggle {
+display: flex;
+align-items: center;
+gap: .5rem;
+
+input {
+    accent-color: #FECC00;
+}
+}

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import QRGen from "../qrcodegen/QRGen";
 import OptionsPanel from "./OptionsPanel";
 
@@ -8,7 +8,11 @@ export default function QRGeneratorBlock() {
     format: "png",
     size: 150,
     margin: 0,
+    fgColor: "#000000",
+    bgColor: "#FFFFFF",
   });
+
+
 
   const togglePanel = () => {
     setOptionsOpen(prev => !prev);
@@ -16,20 +20,16 @@ export default function QRGeneratorBlock() {
 
   return (
     <>
-      <div className="mainCard fade">
-        <QRGen
-          exportOptions={exportOptions}
-          setExportOptions={setExportOptions}
-          togglePanel={togglePanel}
-        />
-      </div>
-
-      <aside className={`optionsPanel ${optionsOpen ? "open" : "closed"}`}>
-        <OptionsPanel
-          options={exportOptions}
-          setOptions={setExportOptions}
-        />
-      </aside>
+      <QRGen
+        exportOptions={exportOptions}
+        setExportOptions={setExportOptions}
+        togglePanel={togglePanel}
+      />
+      <OptionsPanel
+        options={exportOptions}
+        setOptions={setExportOptions}
+        optionsOpen={optionsOpen}
+      />
     </>
   );
 }

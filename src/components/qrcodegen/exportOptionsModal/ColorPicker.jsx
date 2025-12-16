@@ -1,11 +1,11 @@
 import "./colorPicker.scss";
 import { useState } from "react";
-
 import { Copy, Trash2 } from "lucide-react";
 
 function ColorPicker({ color: colorProp, id, onDelete, onUpdate, simple }) {
   const initialInputValue =
     colorProp.length === 4 ? colorProp.toUpperCase() : colorProp.toUpperCase();
+
   const initialColor =
     colorProp.length === 4
       ? expandHex(colorProp.toUpperCase())
@@ -50,46 +50,39 @@ function ColorPicker({ color: colorProp, id, onDelete, onUpdate, simple }) {
   }
 
   function copyColorToClipboard() {
-    navigator.clipboard
-      .writeText(color.toUpperCase())
-      .then(() => {
-        console.log("Color copiado al portapapeles:", color.toUpperCase());
-      })
-      .catch((err) => {
-        console.error("Error al copiar el color:", err);
-      });
+    navigator.clipboard.writeText(color.toUpperCase());
   }
 
   return (
-    <div className={styles["color-display"]}>
+    <div className="color-display">
       <input
         type="text"
         value={inputValue.toUpperCase()}
         onChange={handleTextInputChange}
         maxLength={7}
-        className={`${styles["color-text-input"]} pr-5 py-3 pl-10`}
+        className="color-text-input pr-5 py-3 pl-10"
       />
 
-      <div className={styles["color-display-box-container"]}>
+      <div className="color-display-box-container">
         <div
           style={{ backgroundColor: color }}
-          className={styles["color-display-box-overlay"]}
+          className="color-display-box-overlay"
         />
         <input
           type="color"
           value={color}
           onChange={handleColorChange}
-          className={styles["color-display-box"]}
+          className="color-display-box"
         />
       </div>
 
       {!simple && (
-        <div className="absolute top-1/2 ... flex gap-3 items-center">
+        <div className="absolute top-1/2 flex gap-3 items-center">
           <button onClick={copyColorToClipboard}>
-            <Copy size={14} className={styles["icon-copy"]} />
+            <Copy size={14} className="icon-copy" />
           </button>
           <button onClick={() => onDelete(id)}>
-            <Trash2 size={14} classname={styles["icon-delete"]} />
+            <Trash2 size={14} className="icon-delete" />
           </button>
         </div>
       )}
