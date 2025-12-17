@@ -1,0 +1,38 @@
+@use "@/styles/_mixins.scss" as *;
+
+.qrGen {
+    & .qrGen-inputs-container {
+        width: 100%;
+        & .qrGen-input{
+            @include control-input();
+            margin: 1rem 0;
+            width: 100%;
+        }
+        & .qr-code-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            background: #151515;
+            box-shadow: 3px 3px 7px #080808,
+                -3px -3px 7px #222222;
+            border-radius: 1rem;
+        }
+    }
+
+    & .qrGen-actions-container {
+
+        .generar-button {
+            @include btn-dark(1rem, 0.6rem);
+        }
+
+        .descargar-button {
+            @include btn-primary;
+        }
+
+        .disabled-button {
+            @include btn-disabled;
+        }
+    }
+}

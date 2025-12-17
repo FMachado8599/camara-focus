@@ -11,7 +11,7 @@ function App() {
   const [activeGen, setActiveGen] = useState("qr");
 
   return (
-    <main className="home">
+    <div className="home">
       <header className="home-head">
         <a href="https://www.camaratbwa.com/" target="_blank">
           <img src={camaraLogo} className="logo" alt="Vite logo" />
@@ -23,13 +23,13 @@ function App() {
         />
       </header>
 
-      <div className="main-components-container">
+      <main className="main-components-container">
           {activeGen === "qr" && <QRGenContainer />}
           {activeGen === "bar" && <BarcodeGenContainer />}
-      </div>
+      </main>
 
-      <span className="credits">Developed by Camara\TBWA</span>
-    </main>
+      <footer className="credits">Developed by Camara\TBWA</footer>
+    </div>
   );
 }
 

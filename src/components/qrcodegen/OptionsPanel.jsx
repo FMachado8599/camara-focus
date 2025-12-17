@@ -21,7 +21,7 @@ export default function ExportOptionsPanel({
   };
 
   return (
-    <aside className={`optionsPanel ${optionsOpen ? "open" : "closed"}`}>
+    <aside className={`optionsPanel ${optionsOpen ? "open" : "closed"} `}>
       <h3>Opciones de exportación</h3>
       <div className="options-sections-container">
         <div className="option-section">

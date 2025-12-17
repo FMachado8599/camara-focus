@@ -1,11 +1,12 @@
 import { useState, useRef } from "react";
 import { QRCodeSVG } from "qrcode.react";
 import "./qrcodegen.scss";
-import { handleDownload, serializeSvg, generateQrId} from "../../utils/download/qrGenUtils";
+import { handleDownload, serializeSvg, generateQrId } from "../../utils/download/qrGenUtils";
 import { Settings } from "lucide-react";
 import { db } from "../../lib/firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { useToast } from "@/context/ToastContext"
+import "@/styles/gen-cards/_genCard.scss";
 
 const QRGen = ({ togglePanel, exportOptions, setExportOptions }) => {
   const [text, setText] = useState("");
@@ -57,68 +58,73 @@ const QRGen = ({ togglePanel, exportOptions, setExportOptions }) => {
         <Settings size={18} onClick={togglePanel} />
       </span>
 
-      <input
-        type="text"
-        placeholder="Nombre del QR"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        className="qr-name"
-      />
+      <div className="qrGen-inputs-container">
+        <input
+          className="qrGen-input"
+          type="text"
+          placeholder="Nombre del QR"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
 
-      <div className="qr-code-container">
-        {!loading && !showQR && text.trim() === "" && (
-          <div style={{ opacity: 0.1 }}>
+        <div className="qr-code-container">
+          {!loading && !showQR && text.trim() === "" && (
+            <div style={{ opacity: 0.1 }}>
+              <QRCodeSVG
+                value="https://www.camaratbwa.com/"
+                bgColor="transparent"
+                fgColor="#ffffff"
+                size={128}
+              />
+            </div>
+          )}
+
+          {loading && <span className="loader"></span>}
+
+          {showQR && (
             <QRCodeSVG
-              value="https://www.camaratbwa.com/"
+              ref={svgRef}
+              value={text}
               bgColor="transparent"
               fgColor="#ffffff"
+              id="qr-generated"
               size={128}
+              marginSize={exportOptions.margin}
+              className="qrcode-svg"
             />
-          </div>
-        )}
+          )}
+        </div>
 
-        {loading && <span className="loader"></span>}
+        <input
+          className="qrGen-input"
+          type="text"
+          value={text}
+          placeholder="Escribe o pega tu URL aquí"
+          onChange={(e) => setText(e.target.value)}
+        />
 
-        {showQR && (
-          <QRCodeSVG
-            ref={svgRef}
-            value={text}
-            bgColor="transparent"
-            fgColor="#ffffff"
-            id="qr-generated"
-            size={128}
-            marginSize={exportOptions.margin}
-            className="qrcode-svg"
-          />
-        )}
       </div>
+      <div className="qrGen-actions-container">
+        <button className="generar-button" onClick={handleGenerate}>
+          Generar
+        </button>
 
-      <input
-        type="text"
-        value={text}
-        placeholder="Escribe o pega tu URL aquí"
-        onChange={(e) => setText(e.target.value)}
-      />
+        <button
+          className={showQR ? "descargar-button" : "disabled-button"}
+          onClick={() => handleDownload(exportOptions)}
+          disabled={!showQR}
+        >
+          Descargar
+        </button>
 
-      <button className="generar-button" onClick={handleGenerate}>
-        Generar
-      </button>
-
-      <button
-        className={showQR ? "descargar-button" : "disabled-button"}
-        onClick={() => handleDownload(exportOptions)}
-        disabled={!showQR}
-      >
-        Descargar
-      </button>
-
-      <button
-        className={showQR ? "descargar-button" : "disabled-button"}
-        onClick={handleSaveQR}
-        disabled={!showQR}
-      >
-        Guardar QR
-      </button>
+        <button
+          className={showQR ? "descargar-button" : "disabled-button"}
+          onClick={handleSaveQR}
+          disabled={!showQR}
+        >
+          Guardar QR
+        </button>
+      </div>
     </div>
   );
 };

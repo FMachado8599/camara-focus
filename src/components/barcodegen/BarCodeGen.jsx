@@ -102,43 +102,41 @@ export default function BarCodeGen({ togglePanel, options, optionsOpen }) {
   };
 
   return (
-    <div className="barcode-gen mainCard fade">
-      <div className="barcode-card">
-        <header className="barcode-header">
-          <h2>Barcode Gen</h2>
-          <Settings
-            size={18}
-            className="barcode-settings"
-            onClick={togglePanel}
-          />
-        </header>
-        <div className="barcode-preview">
-          {!generatedValue && !loading && (
-            <svg className="preview-placeholder" ref={placeholderRef}></svg>
-          )}
-
-          {loading && <span className="loader"></span>}
-
-          {generatedValue && <svg ref={svgRef} className="barcode-svg"></svg>}
-        </div>
-        <input
-          type="text"
-          value={inputValue}
-          placeholder="5901234123457"
-          onChange={(e) => setInputValue(e.target.value)}
+    <div className="barcode-card mainCard fade">
+      <header className="barcode-header">
+        <h2>Barcode Gen</h2>
+        <Settings
+          size={18}
+          className="barcode-settings"
+          onClick={togglePanel}
         />
-        <div>
-          <button className="generar-button" onClick={handleGenerate}>
-            Generar
-          </button>
-          <button
-            className={generatedValue ? "descargar-button" : "disabled-button"}
-            disabled={!generatedValue}
-            onClick={handleDownload}
-          >
-            Descargar
-          </button>
-        </div>
+      </header>
+      <div className="barcode-preview">
+        {!generatedValue && !loading && (
+          <svg className="preview-placeholder" ref={placeholderRef}></svg>
+        )}
+
+        {loading && <span className="loader"></span>}
+
+        {generatedValue && <svg ref={svgRef} className="barcode-svg"></svg>}
+      </div>
+      <input
+        type="text"
+        value={inputValue}
+        placeholder="5901234123457"
+        onChange={(e) => setInputValue(e.target.value)}
+      />
+      <div>
+        <button className="generar-button" onClick={handleGenerate}>
+          Generar
+        </button>
+        <button
+          className={generatedValue ? "descargar-button" : "disabled-button"}
+          disabled={!generatedValue}
+          onClick={handleDownload}
+        >
+          Descargar
+        </button>
       </div>
     </div>
   );

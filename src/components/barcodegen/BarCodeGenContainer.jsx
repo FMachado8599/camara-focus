@@ -21,7 +21,7 @@ export default function BarcodeGenContainer() {
   };
 
   return (
-    <>
+    <div className="row">
       <BarCodeGen
         options={options}
         togglePanel={togglePanel}
@@ -32,6 +32,6 @@ export default function BarcodeGenContainer() {
         setOptions={setOptions}
         optionsOpen={optionsOpen}
       />
-    </>
+    </div>
   );
 }

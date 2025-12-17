@@ -23,7 +23,6 @@
 }
 
 .barcode-card {
-  @include neo-card;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
