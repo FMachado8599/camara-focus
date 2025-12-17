@@ -1,0 +1,16 @@
+.optionsPanel {
+  transition: transform .35s cubic-bezier(.4,0,.2,1),
+              opacity .2s ease;
+
+  &.open {
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  &.closed {
+    transform: translateX(110%);
+    opacity: 0;
+    pointer-events: none;
+  }
+}

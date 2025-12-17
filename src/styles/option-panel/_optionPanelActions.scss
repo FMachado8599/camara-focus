@@ -1,0 +1,19 @@
+.panel-actions {
+  width: 100%;
+  padding: 1.5rem;
+
+  button {
+    width: 100%;
+    padding: .8rem;
+    border-radius: 999px;
+    font-weight: bold;
+    cursor: pointer;
+
+    color: #000;
+    background: #FECC00;
+
+    &:hover {
+      background: #ffdd57;
+    }
+  }
+}

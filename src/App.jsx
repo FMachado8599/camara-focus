@@ -6,15 +6,13 @@ import BarcodeGenContainer from "./components/barcodegen/BarCodeGenContainer";
 import camaraLogo from "./assets/logo/camaratbwa_logo.jpeg";
 import "./App.scss";
 import "./styles/_layout.scss";
-import "./styles/exportOptionsPanel.scss";
 
 function App() {
   const [activeGen, setActiveGen] = useState("qr");
 
   return (
     <main className="home">
-
-      <div className="home-head">
+      <header className="home-head">
         <a href="https://www.camaratbwa.com/" target="_blank">
           <img src={camaraLogo} className="logo" alt="Vite logo" />
         </a>
@@ -23,11 +21,11 @@ function App() {
           onQR={() => setActiveGen("qr")}
           onBar={() => setActiveGen("bar")}
         />
-      </div>
+      </header>
 
       <div className="main-components-container">
-        {activeGen === "qr" && <QRGenContainer />}
-        {activeGen === "bar" && <BarcodeGenContainer />}
+          {activeGen === "qr" && <QRGenContainer />}
+          {activeGen === "bar" && <BarcodeGenContainer />}
       </div>
 
       <span className="credits">Developed by Camara\TBWA</span>

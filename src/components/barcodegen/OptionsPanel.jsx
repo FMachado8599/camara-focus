@@ -1,4 +1,4 @@
-import "./_barcodeOptionsPanel.scss";
+import "../../styles/option-panel/index.scss";
 import CardOption from "../qrcodegen/exportOptionsModal/cardOption";
 import { Copy, ClipboardPaste } from "lucide-react";
 import { useToast } from "@/context/ToastContext"

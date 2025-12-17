@@ -1,10 +1,9 @@
-    .loader {
-        width: 48px;
-        height: 48px;
-        display: inline-block;
-        position: relative;
-        }
-    .loader::after,
+.loader {
+    width: 48px;
+    height: 48px;
+    display: inline-block;
+    position: relative;
+    &::after,
     .loader::before {
     content: '';  
     box-sizing: border-box;
@@ -16,7 +15,8 @@
     top: 0;
     animation: rotationBreak 3s ease-in-out infinite alternate;
     }
-    .loader::after {
+    &::after {
     border-color: #FECC00;
     animation-direction: alternate-reverse;
     }
+}

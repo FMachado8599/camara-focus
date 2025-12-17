@@ -1,30 +1,14 @@
 @use "../../styles/_mixins.scss" as *;
 
-.qrGen {
+.qrGen.mainCard {
+  @include neo-card;
+
   width: 100%;
   display: flex;
-  justify-content: center;
   flex-direction: column;
-}
-
-.qrcode-svg {
-  opacity: 0;
-  animation: fadeInBarcode 1s ease forwards;
-}
-
-@keyframes fadeInBarcode {
-  from {
-    opacity: 0;
-    transform: translateY(4px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.qr-card {
-  @include neo-card(250px);
+  justify-content: center;
+  position: relative;
+  height: auto;
 
   &::before {
     content: "";
@@ -33,72 +17,54 @@
     border-radius: 2rem;
     z-index: -2;
     pointer-events: none;
-    box-shadow: 20px 20px 60px #000000, -20px -20px 60px #151515;
+    box-shadow: 20px 20px 60px #000000,
+                -20px -20px 60px #151515;
   }
-  & h2 {
+
+  h2 {
     margin-bottom: 1rem;
   }
-  & .option-menu {
+
+  .option-menu {
     position: absolute;
     top: 1.5rem;
     right: 1.5rem;
     color: #9c9c9c;
     cursor: pointer;
     transition: color 0.3s ease-in-out;
+
     &:hover {
       color: #FECC00;
     }
   }
-  & .qr-code-container {
-    width: clamp(100px, 100%, 100vw);
-    aspect-ratio: 1/1;
-    height: clamp(100px, auto, 150px);
+
+  .qr-code-container {
+    width: 100%;
+    aspect-ratio: 1 / 1;
     background: #151515;
-    box-shadow:  3px 3px 7px #080808,
+    box-shadow: 3px 3px 7px #080808,
                 -3px -3px 7px #222222;
     border-radius: 1rem;
-    padding: 0;
-    margin: 0;
     margin-bottom: 1.6rem;
+
     display: flex;
     justify-content: center;
     align-items: center;
-
-
-    @keyframes rotationBreak {
-    0% {
-        transform: rotate(0);
-    }
-    25% {
-        transform: rotate(90deg);
-    }
-    50% {
-        transform: rotate(180deg);
-    }
-    75% {
-        transform: rotate(270deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-    }
   }
-  & input {
+
+  input {
     @include control-input();
-    // &.qr-name{
-    //   margin-bottom: 1rem
-    // }
   }
 
-  & .generar-button {
-    @include btn-dark(1rem, 0.6rem); // respeta tus márgenes exactos
+  .generar-button {
+    @include btn-dark(1rem, 0.6rem);
   }
 
-  & .descargar-button {
+  .descargar-button {
     @include btn-primary;
   }
 
-  & .disabled-button {
+  .disabled-button {
     @include btn-disabled;
   }
 }

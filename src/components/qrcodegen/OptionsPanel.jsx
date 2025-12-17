@@ -1,4 +1,4 @@
-import "../../styles/exportOptionsPanel.scss"
+import "../../styles/option-panel/index.scss";
 import CardOption from "./exportOptionsModal/cardOption";
 import ColorPicker from "./exportOptionsModal/ColorPicker";
 import { useToast } from "@/context/ToastContext"

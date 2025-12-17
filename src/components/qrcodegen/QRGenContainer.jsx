@@ -19,7 +19,7 @@ export default function QRGeneratorBlock() {
   };
 
   return (
-    <>
+    <div className="row">
       <QRGen
         exportOptions={exportOptions}
         setExportOptions={setExportOptions}
@@ -30,6 +30,6 @@ export default function QRGeneratorBlock() {
         setOptions={setExportOptions}
         optionsOpen={optionsOpen}
       />
-    </>
+    </div>
   );
 }

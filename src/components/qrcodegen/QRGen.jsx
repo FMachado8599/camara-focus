@@ -50,72 +50,75 @@ const QRGen = ({ togglePanel, exportOptions, setExportOptions }) => {
 
 
   return (
-    <div className="qrGen mainCard fade">
-      <div className="qr-card">
-        <h2>URL a QR</h2>
-        <span className="option-menu">
-          <Settings size={18} onClick={togglePanel} />
-        </span>
-        <input
-          type="text"
-          placeholder="Nombre del QR"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className="qr-name"
-        />
-        <div className="qr-code-container">
-          {!loading && !showQR && text.trim() === "" && (
-            <div style={{ opacity: 0.1 }}>
-              <QRCodeSVG
-                value="https://www.camaratbwa.com/"
-                bgColor="transparent"
-                fgColor="#ffffff"
-                size={128}
-              />
-            </div>
-          )}
+    <div className="mainCard qrGen fade">
+      <h2>URL a QR</h2>
 
-          {loading && <span className="loader"></span>}
+      <span className="option-menu">
+        <Settings size={18} onClick={togglePanel} />
+      </span>
 
-          {showQR && (
-            <div>
-              <QRCodeSVG
-                ref={svgRef}
-                value={text}
-                bgColor="transparent"
-                fgColor="#ffffff"
-                id="qr-generated"
-                size={128}
-                marginSize={exportOptions.margin}
-                className="qrcode-svg"
-              />
-            </div>
-          )}
-        </div>
-        <input
-          type="text"
-          value={text}
-          placeholder="Escribe o pega tu URL aquí"
-          onChange={(e) => setText(e.target.value)}
-        />
-        <button className="generar-button" onClick={handleGenerate}>
-          Generar
-        </button>
-        <button
-          className={showQR ? "descargar-button" : "disabled-button"}
-          onClick={() => handleDownload(exportOptions)}
-          disabled={!showQR}
-        >
-          Descargar
-        </button>
-        <button
-          className={showQR ? "descargar-button" : "disabled-button"}
-          onClick={handleSaveQR}
-          disabled={!showQR}
-        >
-          Guardar QR
-        </button>
+      <input
+        type="text"
+        placeholder="Nombre del QR"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        className="qr-name"
+      />
+
+      <div className="qr-code-container">
+        {!loading && !showQR && text.trim() === "" && (
+          <div style={{ opacity: 0.1 }}>
+            <QRCodeSVG
+              value="https://www.camaratbwa.com/"
+              bgColor="transparent"
+              fgColor="#ffffff"
+              size={128}
+            />
+          </div>
+        )}
+
+        {loading && <span className="loader"></span>}
+
+        {showQR && (
+          <QRCodeSVG
+            ref={svgRef}
+            value={text}
+            bgColor="transparent"
+            fgColor="#ffffff"
+            id="qr-generated"
+            size={128}
+            marginSize={exportOptions.margin}
+            className="qrcode-svg"
+          />
+        )}
       </div>
+
+      <input
+        type="text"
+        value={text}
+        placeholder="Escribe o pega tu URL aquí"
+        onChange={(e) => setText(e.target.value)}
+      />
+
+      <button className="generar-button" onClick={handleGenerate}>
+        Generar
+      </button>
+
+      <button
+        className={showQR ? "descargar-button" : "disabled-button"}
+        onClick={() => handleDownload(exportOptions)}
+        disabled={!showQR}
+      >
+        Descargar
+      </button>
+
+      <button
+        className={showQR ? "descargar-button" : "disabled-button"}
+        onClick={handleSaveQR}
+        disabled={!showQR}
+      >
+        Guardar QR
+      </button>
     </div>
   );
 };

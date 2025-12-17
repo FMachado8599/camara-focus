@@ -23,12 +23,11 @@
 }
 
 .barcode-card {
-  @include neo-card(250px);
-  height: 470px;
+  @include neo-card;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  input {
+  & input {
     @include control-input();
     &::placeholder {
     color: #777;
@@ -37,19 +36,19 @@
   }
   
 
-  .generar-button {
+  & .generar-button {
     @include btn-dark(1rem, 0.6rem);
   }
 
-  .descargar-button {
+  & .descargar-button {
     @include btn-primary;
   }
 
-  .disabled-button {
+  & .disabled-button {
     @include btn-disabled;
   }
 
-  .barcode-preview {
+  & .barcode-preview {
     width: clamp(100px, 100%, 100vw);
     aspect-ratio: 1/1;
     height: clamp(100px, auto, 150px);
@@ -69,29 +68,30 @@
         padding: .6rem;
     }
   }
-}
+  & .barcode-header {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    position: relative;
 
-.barcode-header {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  position: relative;
+    h2 {
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+      text-align: center;
+    }
 
-  h2 {
-    margin-bottom: 1rem;
-    font-size: 1.1rem;
-    text-align: center;
-  }
+    .barcode-settings {
+      position: absolute;
+      right: 0;
+      cursor: pointer;
+      color: #9c9c9c;
 
-  .barcode-settings {
-    position: absolute;
-    right: 0;
-    cursor: pointer;
-    color: #9c9c9c;
-
-    &:hover {
-      color: #FECC00;
+      &:hover {
+        color: #FECC00;
+      }
     }
   }
 }
+
+
 
