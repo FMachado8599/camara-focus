@@ -1,8 +1,8 @@
-
 import { useState } from "react";
 import GenSwitch from "./components/GeneratorSwitch/GenSwitch";
 import QRGenContainer from "./components/qrcodegen/QRGenContainer";
 import BarcodeGenContainer from "./components/barcodegen/BarCodeGenContainer";
+import Nav from "@/components/nav/Nav";
 import camaraLogo from "./assets/logo/camaratbwa_logo.jpeg";
 import "./App.scss";
 import "./styles/_layout.scss";
@@ -12,6 +12,7 @@ function App() {
 
   return (
     <div className="home">
+      <Nav />
       <header className="home-head">
         <a href="https://www.camaratbwa.com/" target="_blank">
           <img src={camaraLogo} className="logo" alt="Vite logo" />
@@ -24,8 +25,8 @@ function App() {
       </header>
 
       <main className="main-components-container">
-          {activeGen === "qr" && <QRGenContainer />}
-          {activeGen === "bar" && <BarcodeGenContainer />}
+        {activeGen === "qr" && <QRGenContainer />}
+        {activeGen === "bar" && <BarcodeGenContainer />}
       </main>
 
       <footer className="credits">Developed by Camara\TBWA</footer>

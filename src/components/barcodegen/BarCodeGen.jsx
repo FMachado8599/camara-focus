@@ -76,7 +76,6 @@ export default function BarCodeGen({ togglePanel, options, optionsOpen }) {
     });
   }, [generatedValue, options]);
 
-
   useEffect(() => {
     if (!generatedValue && placeholderRef.current) {
       try {
@@ -111,21 +110,25 @@ export default function BarCodeGen({ togglePanel, options, optionsOpen }) {
           onClick={togglePanel}
         />
       </header>
-      <div className="barcode-preview">
-        {!generatedValue && !loading && (
-          <svg className="preview-placeholder" ref={placeholderRef}></svg>
-        )}
+      <div className="barcode-input-group">
+        <div className="barcode-preview">
+          {!generatedValue && !loading && (
+            <svg className="preview-placeholder" ref={placeholderRef}></svg>
+          )}
 
-        {loading && <span className="loader"></span>}
+          {loading && <span className="loader"></span>}
 
-        {generatedValue && <svg ref={svgRef} className="barcode-svg"></svg>}
+          {generatedValue && <svg ref={svgRef} className="barcode-svg"></svg>}
+        </div>
+        <input
+          type="text"
+          value={inputValue}
+          placeholder="5901234123457"
+          onChange={(e) => setInputValue(e.target.value)}
+          className="barcode-input"
+          maxlength="13"
+        />
       </div>
-      <input
-        type="text"
-        value={inputValue}
-        placeholder="5901234123457"
-        onChange={(e) => setInputValue(e.target.value)}
-      />
       <div>
         <button className="generar-button" onClick={handleGenerate}>
           Generar

@@ -1,4 +1,4 @@
-import { useState} from "react";
+import { useState } from "react";
 import BarCodeGen from "./BarCodeGen";
 import BarcodeOptionsPanel from "./OptionsPanel";
 
@@ -9,7 +9,7 @@ export default function BarcodeGenContainer() {
     height: 90,
     displayValue: true,
     lineColor: "#FFFFFF",
-    backgroundColor: "transparent",
+    backgroundColor: "transparente",
     fontFamily: "inter",
     fontSize: 14,
     format: "svg",
@@ -17,7 +17,7 @@ export default function BarcodeGenContainer() {
   });
 
   const togglePanel = () => {
-    setOptionsOpen(prev => !prev);
+    setOptionsOpen((prev) => !prev);
   };
 
   return (

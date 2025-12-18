@@ -33,7 +33,7 @@
 }
 
 // INPUT BASE
-@mixin control-input($maxWidth: 186px) {
+@mixin control-input {
   @include button;
   background: #1c1c1c;
   border-radius: 1rem;
@@ -45,7 +45,6 @@
   font-family: 'Inter', sans-serif;
   font-weight: 600;
   width: 100%;
-  max-width: $maxWidth;
 
   &:focus-visible {
     outline: 4px auto rgb(from #FECC00 r g b / 70%);
