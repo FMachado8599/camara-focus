@@ -1,10 +1,11 @@
 import { useState } from "react";
 import Button from "../../components/UI/Button";
-import Input from "../../components/UI/Input";
 import Card from "../../components/UI/Card";
 import { Dropdown, DropdownItem } from "../../components/UI/Dropdown";
-import { Copy, Edit, Download, Trash2, Plus, Files, Search } from "lucide-react";
+import { Copy, Edit, Download, Trash2, Plus, Files} from "lucide-react";
 import "../../styles/store/_store.scss";
+import StoreTopbar from "./StoreTopbar";
+import { useToast } from "@/context/ToastContext";
 
 const TYPE_LABELS = {
   url: "URL",
@@ -20,17 +21,18 @@ const TYPE_LABELS = {
 };
 
 export default function Store({ savedQRs, onEdit, onDelete, onDuplicate, onCreateNew }) {
-  const [searchQuery, setSearchQuery] = useState("");
+    const [searchQuery, setSearchQuery] = useState("");
+    const { showToast } = useToast(); 
 
   const filteredQRs = savedQRs.filter((qr) =>
-    (qr.name + qr.type + qr.destination)
+    `${qr.name ?? ""}${qr.type ?? ""}${qr.destination ?? ""}`
       .toLowerCase()
       .includes(searchQuery.toLowerCase())
   );
 
   const handleCopyLink = (dest) => {
     navigator.clipboard.writeText(dest);
-    alert("Enlace copiado");
+    showToast("Enlace copiado");
   };
 
   const handleDownload = (qr) => {
@@ -42,28 +44,7 @@ export default function Store({ savedQRs, onEdit, onDelete, onDuplicate, onCreat
 
   return (
 <div className="store-page">
-
-      {/* Top bar */}
-      <div className="store-topbar neumorphic-flat">
-        <div className="topbar-header">
-          <h1 className="topbar-title">Mis QRs</h1>
-
-          <Button onClick={onCreateNew} className="btn-accent neumorphic-button">
-            <Plus size={14} style={{ marginRight: 4 }} />
-            Nuevo QR
-          </Button>
-        </div>
-
-        <div className="search-section">
-          <Search className="search-icon" size={14} />
-          <Input
-            placeholder="Buscar por nombre, tipo o destino..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="search-input neumorphic-inset"
-          />
-        </div>
-      </div>
+      <StoreTopbar searchQuery={searchQuery} setSearchQuery={setSearchQuery} onCreateNew={onCreateNew}/>
 
       {/* QR LIST */}
       <div className="store-grid">

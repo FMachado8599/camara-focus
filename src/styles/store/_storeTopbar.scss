@@ -1,0 +1,51 @@
+$accent: #FECC00;
+
+.store-topbar {
+    padding: 1rem 2rem;
+    border-radius: 999px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background: rgba(33, 33, 33, 0.5);
+    width: fit-content;
+    gap: 1.2rem;
+
+    & .topbar-title {
+        font-size: 1.2rem;
+        font-weight: 600;
+    }
+
+    & .search-section {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        justify-content: center;
+        align-items: center;
+        & .add-code{
+            border-radius: 99px;
+            aspect-ratio: 1/1;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: $accent;
+            padding: .4rem;
+            & .plus{
+                padding: 0;
+                margin: 0;
+                color: black;
+                cursor: pointer;
+            }
+        }
+        & .search-icon{
+            opacity: 0.5;
+        }
+
+        & .search-input {
+            padding: .4rem 1rem .4rem 1.6rem;
+            border-radius: 1.5rem;
+            border: 1px solid grey;
+        }
+    }
+}

@@ -53,7 +53,7 @@ export default function StorePage() {
 
   return (
     <Store
-        clasName="store-container"
+      clasName="store-container"
       savedQRs={savedQRs}
       onEdit={handleEdit}
       onDelete={handleDelete}

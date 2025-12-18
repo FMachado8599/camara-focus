@@ -26,6 +26,7 @@
     top: 1rem;
     right: 1rem;
     display: inline-block;
+    z-index: 10;
     & .menu-button {
         width: 36px;
         height: 36px;
@@ -37,6 +38,18 @@
         border: none;
         cursor: pointer;
         transition: background 0.2s;
+        padding: 0;
+    }
+    & .menu-button-active {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: #FECC00;
+        color: black;
+        display: grid;
+        place-items: center;
+        border: none;
+        cursor: pointer;
         padding: 0;
     }
     & .menu-dropdown {
@@ -60,6 +73,7 @@
             10px 10px 25px rgba(0, 0, 0, 0.6),
             -10px -10px 25px rgba(40, 40, 40, 0.4);
         border-radius: 2rem;
+        pointer-events: none;
         & .menu-dropdown-section{
             display: flex;
             flex-direction: column;
@@ -79,6 +93,7 @@
                 align-items: center;
                 gap: .8rem;
                 color: var(--gray--secondary);
+                cursor:default;
                 & a {
                     display: flex;
                     align-items: center;
@@ -86,19 +101,10 @@
                     font-size: medium;
                     color: var(--gray--secondary);
                 }
-                &:hover {
+
+                &.enabled{
                     cursor: pointer;
-                    & svg{
-                        color: #FECC00;
-                    }
-                    & a{
-                        color: #FECC00;
-                    }
-                    & p{
-                        color: #FECC00;
-                    }
-                }
-                & .avaitable{
+                    pointer-events: visible;
                     & svg{
                         color: var(--bg--primary);
                     }
@@ -107,6 +113,18 @@
                     }
                     & p{
                         color: var(--bg--primary);
+                    }
+                    &:hover {
+                        cursor: pointer;
+                        & svg{
+                            color: #FECC00;
+                        }
+                        & a{
+                            color: #FECC00;
+                        }
+                        & p{
+                            color: #FECC00;
+                        }
                     }
                 }
                 & p{
