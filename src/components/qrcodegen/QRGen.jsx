@@ -1,11 +1,14 @@
 import { useState, useRef } from "react";
 import { QRCodeSVG } from "qrcode.react";
-import "./qrcodegen.scss";
-import { handleDownload, serializeSvg, generateQrId } from "../../utils/download/qrGenUtils";
+import {
+  handleDownload,
+  serializeSvg,
+  generateQrId,
+} from "../../utils/download/qrGenUtils";
 import { Settings } from "lucide-react";
 import { db } from "../../lib/firebase";
 import { doc, setDoc } from "firebase/firestore";
-import { useToast } from "@/context/ToastContext"
+import { useToast } from "@/context/ToastContext";
 import "@/styles/gen-cards/_genCard.scss";
 
 const QRGen = ({ togglePanel, exportOptions, setExportOptions }) => {
@@ -16,9 +19,7 @@ const QRGen = ({ togglePanel, exportOptions, setExportOptions }) => {
   const svgRef = useRef(null);
   const { showToast } = useToast();
 
-
   const handleGenerate = async () => {
-
     if (text.trim() === "") {
       showToast("Escribí algo wacho");
       return;
@@ -32,7 +33,6 @@ const QRGen = ({ togglePanel, exportOptions, setExportOptions }) => {
   };
 
   const handleSaveQR = async () => {
-
     const svgString = serializeSvg(svgRef.current);
     console.log("SVG GUARDADO:", svgString.slice(0, 300));
     const id = generateQrId();
@@ -46,9 +46,8 @@ const QRGen = ({ togglePanel, exportOptions, setExportOptions }) => {
       updatedAt: new Date(),
     });
 
-    showToast("Código QR Guardado Correctamente")
+    showToast("Código QR Guardado Correctamente");
   };
-
 
   return (
     <div className="mainCard qrGen fade">
@@ -102,7 +101,6 @@ const QRGen = ({ togglePanel, exportOptions, setExportOptions }) => {
           placeholder="Escribe o pega tu URL aquí"
           onChange={(e) => setText(e.target.value)}
         />
-
       </div>
       <div className="qrGen-actions-container">
         <button className="generar-button" onClick={handleGenerate}>
