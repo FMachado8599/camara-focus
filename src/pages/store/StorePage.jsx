@@ -3,10 +3,12 @@ import { db } from "../../lib/firebase";
 import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import Store from "./Store";
 import "../../styles/store/_storePage.scss"
+import { useNavigate } from "react-router-dom";
 
 export default function StorePage() {
   const [savedQRs, setSavedQRs] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function loadQRs() {
@@ -30,8 +32,7 @@ export default function StorePage() {
   }, []);
 
   const handleEdit = (qr) => {
-    // Te va a llevar a: /edit/:id
-    window.location.href = `/edit/${qr.id}`;
+    navigate(`/qr/${qr.id}/edit`);
   };
 
   const handleDelete = async (id) => {

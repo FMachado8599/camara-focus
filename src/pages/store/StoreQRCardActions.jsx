@@ -23,35 +23,36 @@ export default function QRCardActions({
 
   return (
     <div className="qr-actions">
-      <Button
-        onClick={() => onEdit(qr)}
-        className="qr-edit-btn neumorphic-flat"
-      >
-        <Edit size={14} style={{ marginRight: 4 }} />
-        Editar
+      <Button className="qr-actions-download" onClick={handleDownload}>
+        <Download size={14} /> Descargar
       </Button>
+      <div className="qr-actions-sub">
+        <Button
+          onClick={() => onEdit(qr)}
+          className="qr-edit-btn neumorphic-flat"
+        >
+          <Edit size={14} style={{ marginRight: 4 }} />
+          Editar
+        </Button>
 
-      <Dropdown
-        trigger={
-          <Button className="dropdown-trigger neumorphic-flat">•••</Button>
-        }
-      >
-        <DropdownItem onClick={handleCopyLink}>
-          <Copy size={14} /> Copiar enlace
-        </DropdownItem>
+        <Dropdown
+          trigger={
+            <Button className="dropdown-trigger neumorphic-flat">•••</Button>
+          }
+        >
+          <DropdownItem onClick={handleCopyLink}>
+            <Copy size={14} /> Copiar enlace
+          </DropdownItem>
 
-        <DropdownItem onClick={handleDownload}>
-          <Download size={14} /> Descargar
-        </DropdownItem>
+          <DropdownItem onClick={() => onDuplicate(qr)}>
+            <Files size={14} /> Duplicar
+          </DropdownItem>
 
-        <DropdownItem onClick={() => onDuplicate(qr)}>
-          <Files size={14} /> Duplicar
-        </DropdownItem>
-
-        <DropdownItem onClick={() => onDelete(qr.id)} className="danger">
-          <Trash2 size={14} /> Eliminar
-        </DropdownItem>
-      </Dropdown>
+          <DropdownItem onClick={() => onDelete(qr.id)} className="danger">
+            <Trash2 size={14} /> Eliminar
+          </DropdownItem>
+        </Dropdown>
+      </div>
     </div>
   );
 }

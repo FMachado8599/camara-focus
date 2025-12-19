@@ -1,6 +1,8 @@
 import Card from "@/components/UI/Card";
 import StoreQRCardActions from "./StoreQRCardActions";
 import { Link } from "react-router-dom";
+import { Link2, Calendar } from "lucide-react";
+
 
 const TYPE_LABELS = {
   url: "URL",
@@ -47,9 +49,9 @@ export default function StoreQRCard({
         <h2 className="qr-name">{qr.name}</h2>
 
         <div className="qr-data-secondary">
-          <p className="qr-dest neumorphic-badge">{qr.destination}</p>
+          <p className="qr-dest neumorphic-badge"><Link2 size={14} />{qr.destination}</p>
           <p className="qr-date">
-            {new Date(qr.updatedAt).toLocaleDateString("es-ES")}
+            <Calendar size={14} />{new Date(qr.updatedAt).toLocaleDateString("es-ES")}
           </p>
         </div>
       </div>
