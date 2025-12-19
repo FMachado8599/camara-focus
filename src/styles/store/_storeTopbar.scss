@@ -38,14 +38,41 @@ $accent: #FECC00;
                 cursor: pointer;
             }
         }
-        & .search-icon{
-            opacity: 0.5;
-        }
-
-        & .search-input {
-            padding: .4rem 1rem .4rem 1.6rem;
+        & .search-bar {
+            border: none;
+            width: 20rem;
+            font-size: 1rem;
+            outline: none;
+            gap: 1rem;
             border-radius: 1.5rem;
             border: 1px solid grey;
+            display: flex;
+            flex-direction: row;
+            justify-content: start;
+            align-items: center;
+            padding: .4rem 1rem;
+            max-width: 300px;
+            background: transparent;
+            &:focus-within {
+                border-color: $accent;
+                & .search-icon{
+                    opacity: 1;
+                    color: $accent;
+                }
+            }
+            & .search-icon{
+                opacity: 0.5;
+            }
+
+            & .search-input {
+                padding: .4rem 0 .4rem .4rem;
+                background: transparent;
+                border: none;
+                width: 100%;
+                &:active, &:focus {
+                    outline: none;
+                }
+            }
         }
     }
 }
