@@ -58,9 +58,6 @@ export default function Store({
       <StoreGrid
         qrs={filteredQRs}
         hasSearch={!!searchQuery}
-        onEdit={onEdit}
-        onDelete={onDelete}
-        onDuplicate={onDuplicate}
         onCreateNew={onCreateNew}
         showToast={showToast}
       />

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { db } from "../../lib/firebase"; 
+import { db } from "../../lib/firebase";
 import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import Store from "./Store";
-import "../../styles/store/_storePage.scss"
+import "../../styles/store/_storePage.scss";
 import { useNavigate } from "react-router-dom";
 
 export default function StorePage() {
@@ -14,15 +14,15 @@ export default function StorePage() {
     async function loadQRs() {
       const ref = collection(db, "qrs");
       const snap = await getDocs(ref);
-        const items = snap.docs.map((d) => {
+      const items = snap.docs.map((d) => {
         const data = d.data();
 
         return {
-            id: d.id,
-            ...data,
-            updatedAt: data.updatedAt?.toDate?.() ?? new Date(),
+          id: d.id,
+          ...data,
+          updatedAt: data.updatedAt?.toDate?.() ?? new Date(),
         };
-        });
+      });
 
       setSavedQRs(items);
       setLoading(false);
@@ -56,9 +56,6 @@ export default function StorePage() {
     <Store
       clasName="store-container"
       savedQRs={savedQRs}
-      onEdit={handleEdit}
-      onDelete={handleDelete}
-      onDuplicate={handleDuplicate}
       onCreateNew={handleCreateNew}
     />
   );

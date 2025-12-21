@@ -37,14 +37,7 @@ export default function StoreGrid({
     <div className="store-grid-container">
       <div className="store-grid">
         {qrs.map((qr) => (
-          <StoreQRCard
-            key={qr.id}
-            qr={qr}
-            onEdit={onEdit}
-            onDelete={onDelete}
-            onDuplicate={onDuplicate}
-            showToast={showToast}
-          />
+          <StoreQRCard key={qr.id} qr={qr} showToast={showToast} />
         ))}
       </div>
     </div>

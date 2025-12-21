@@ -1,39 +1,50 @@
 import "@/styles/editQR/_editQR.scss";
 
-import EditQRHeader from "./components/EditQRHeader"
-import EditQRFooter from "./components/EditQRFooter"
-import EditQRForm from "./components/EditQRForm"
-import EditQRPreview from "./components/EditQRPreview"
+import EditQRHeader from "./components/EditQRHeader";
+import EditQRFooter from "./components/EditQRFooter";
+import EditQRForm from "./components/EditQRForm";
+import EditQRPreview from "./components/EditQRPreview";
 
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getQRById, updateQR } from "@/services/qr.service";
 
 function EditQR() {
-  const { qrId } = useParams();
+  const { id } = useParams();
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(true);
-  const [qrData, setQrData] = useState(null);
-
-  const [qrContent, setQrContent] = useState("");
-  const [qrColor, setQrColor] = useState("#000000");
-  const [bgColor, setBgColor] = useState("#ffffff");
-  const [shape, setShape] = useState("square");
-  const [logoEnabled, setLogoEnabled] = useState(false);
-
-  console.log("🟡 qrId desde params:", qrId);
+  const [form, setForm] = useState(null);
 
   useEffect(() => {
+    if (!id) {
+      navigate("/store");
+      return;
+    }
 
-    if (!qrData) return;
+    async function loadQR() {
+      const data = await getQRById(id);
 
-    setQrContent(qrData.url);
-    setQrColor(qrData.color);
-    setBgColor(qrData.bgColor);
-    setShape(qrData.shape);
-    setLogoEnabled(qrData.logoEnabled);
-  }, [qrData]);
+      if (!data) {
+        navigate("/qr");
+        return;
+      }
+
+      setQrName(data.name);
+
+      setForm({
+        content: data.destination ?? "",
+        color: data.color ?? "#000000",
+        bgColor: data.bgColor ?? "#ffffff",
+        shape: data.shape ?? "square",
+        logoEnabled: data.logoEnabled ?? false,
+      });
+
+      setLoading(false);
+    }
+
+    loadQR();
+  }, [id, navigate]);
 
   const handleSave = async () => {
     await updateQR(qrId, {
@@ -46,26 +57,6 @@ function EditQR() {
 
     navigate("/qr");
   };
-
-
-    useEffect(() => {
-
-    if (!qrId) return;
-
-    async function loadQR() {
-      const data = await getQRById(qrId);
-
-      if (!data) {
-        navigate("/qr");
-        return;
-      }
-
-      setQrData(data);
-      setLoading(false);
-    }
-
-    loadQR();
-  }, [qrId, navigate]);
 
   if (loading) return <p>Cargando QR…</p>;
   return (
@@ -96,7 +87,7 @@ function EditQR() {
 
       <EditQRFooter onSave={handleSave} />
     </div>
-  )
+  );
 }
 
-export default EditQR
+export default EditQR;

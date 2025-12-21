@@ -2,13 +2,26 @@ import Button from "@/components/UI/Button";
 import { Dropdown, DropdownItem } from "@/components/UI/Dropdown";
 import { Copy, Edit, Download, Trash2, Files } from "lucide-react";
 
-export default function QRCardActions({
-  qr,
-  onEdit,
-  onDelete,
-  onDuplicate,
-  showToast,
-}) {
+import { Link } from "react-router-dom";
+import { useToast } from "@/context/ToastContext";
+
+import { deleteQR } from "@/services/qr.service";
+import { copyQRLink, downloadQR } from "@/utils/qrActions";
+
+export default function QRCardActions({ qr }) {
+  const { showToast } = useToast();
+
+  const handleDelete = async () => {
+    if (!confirm("¿Seguro?")) return;
+
+    await deleteQR(qr.id);
+    showToast("QR eliminado");
+  };
+
+  const handleDuplicate = () => {
+    showToast("Duplicar todavía no implementado");
+  };
+
   const handleCopyLink = () => {
     navigator.clipboard.writeText(qr.destination);
     showToast("Enlace copiado");
@@ -27,28 +40,25 @@ export default function QRCardActions({
         <Download size={14} /> Descargar
       </Button>
       <div className="qr-actions-sub">
-        <Button
-          onClick={() => onEdit(qr)}
-          className="qr-edit-btn neumorphic-flat"
-        >
+        <Link to={`/qr/${qr.id}/edit`} className="qr-edit-btn neumorphic-flat">
           <Edit size={14} style={{ marginRight: 4 }} />
           Editar
-        </Button>
+        </Link>
 
         <Dropdown
           trigger={
             <Button className="dropdown-trigger neumorphic-flat">•••</Button>
           }
         >
-          <DropdownItem onClick={handleCopyLink}>
+          <DropdownItem onClick={() => copyQRLink(qr.destination)}>
             <Copy size={14} /> Copiar enlace
           </DropdownItem>
 
-          <DropdownItem onClick={() => onDuplicate(qr)}>
+          <DropdownItem onClick={handleDuplicate}>
             <Files size={14} /> Duplicar
           </DropdownItem>
 
-          <DropdownItem onClick={() => onDelete(qr.id)} className="danger">
+          <DropdownItem onClick={handleDelete} className="danger">
             <Trash2 size={14} /> Eliminar
           </DropdownItem>
         </Dropdown>
