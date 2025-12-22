@@ -13,8 +13,13 @@ function EditQR() {
   const { id } = useParams();
   const navigate = useNavigate();
 
+  const [qrName, setQrName] = useState("");
   const [loading, setLoading] = useState(true);
-  const [form, setForm] = useState(null);
+  const [qrContent, setQrContent] = useState("");
+  const [qrColor, setQrColor] = useState("#000000");
+  const [bgColor, setBgColor] = useState("#ffffff");
+  const [shape, setShape] = useState("square");
+  const [logoEnabled, setLogoEnabled] = useState(false);
 
   useEffect(() => {
     if (!id) {
@@ -26,19 +31,16 @@ function EditQR() {
       const data = await getQRById(id);
 
       if (!data) {
-        navigate("/qr");
+        navigate("/store");
         return;
       }
 
-      setQrName(data.name);
-
-      setForm({
-        content: data.destination ?? "",
-        color: data.color ?? "#000000",
-        bgColor: data.bgColor ?? "#ffffff",
-        shape: data.shape ?? "square",
-        logoEnabled: data.logoEnabled ?? false,
-      });
+      setQrName(data.name ?? "");
+      setQrContent(data.destination ?? "");
+      setQrColor(data.color ?? "#000000");
+      setBgColor(data.bgColor ?? "#ffffff");
+      setShape(data.shape ?? "square");
+      setLogoEnabled(data.logoEnabled ?? false);
 
       setLoading(false);
     }
@@ -47,47 +49,53 @@ function EditQR() {
   }, [id, navigate]);
 
   const handleSave = async () => {
-    await updateQR(qrId, {
-      url: qrContent,
-      color: qrColor,
-      bgColor,
-      shape,
-      logoEnabled,
-    });
+    try {
+      await updateQR(id, {
+        destination: qrContent,
+        color: qrColor,
+        bgColor,
+        shape,
+        logoEnabled,
+      });
 
-    navigate("/qr");
+      navigate("/store");
+    } catch (err) {
+      console.error("Error al guardar QR", err);
+      alert("Error al guardar los cambios");
+    }
   };
 
   if (loading) return <p>Cargando QR…</p>;
+
   return (
-    <div className="edit-qr-page">
-      <EditQRHeader name={qrData?.name} />
+      <div className="edit-qr-page">
+        <EditQRHeader name={qrName} />
 
-      <main className="edit-qr-main">
-        <EditQRForm
-          qrContent={qrContent}
-          setQrContent={setQrContent}
-          qrColor={qrColor}
-          setQrColor={setQrColor}
-          bgColor={bgColor}
-          setBgColor={setBgColor}
-          shape={shape}
-          setShape={setShape}
-          logoEnabled={logoEnabled}
-          setLogoEnabled={setLogoEnabled}
-        />
+        <main className="edit-qr-main">
+          <EditQRForm
+            qrContent={qrContent}
+            setQrContent={setQrContent}
+            qrColor={qrColor}
+            setQrColor={setQrColor}
+            bgColor={bgColor}
+            setBgColor={setBgColor}
+            shape={shape}
+            setShape={setShape}
+            logoEnabled={logoEnabled}
+            setLogoEnabled={setLogoEnabled}
+          />
 
-        <EditQRPreview
-          qrColor={qrColor}
-          bgColor={bgColor}
-          shape={shape}
-          logoEnabled={logoEnabled}
-        />
-      </main>
+          <EditQRPreview
+            qrColor={qrColor}
+            bgColor={bgColor}
+            shape={shape}
+            logoEnabled={logoEnabled}
+          />
+        </main>
 
-      <EditQRFooter onSave={handleSave} />
-    </div>
-  );
-}
+        <EditQRFooter onSave={handleSave} />
+      </div>
+    );
+  }
 
 export default EditQR;
