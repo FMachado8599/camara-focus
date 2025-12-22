@@ -1,12 +1,10 @@
 const EditQRFooter = ({ onSave }) => {
   return (
     <footer className="edit-qr-footer">
-      <div className="footer-actions">
-        <button className="btn-secondary">Cancelar</button>
-        <button className="btn-primary" onClick={onSave}>
+        <button className="cancel-button">Cancelar</button>
+        <button className="save-button" onClick={onSave}>
           Guardar cambios
         </button>
-      </div>
     </footer>
   )
 }

@@ -170,7 +170,8 @@ $border: rgba(255,255,255,0.08);
                   font-size: 13px;
                   display: flex;
                   flex-direction: row;
-                  place-items: center;
+                  justify-content: center;
+                  align-items: center;
                   gap: .3rem;
                   &.neumorphic-flat {
                     box-shadow: 

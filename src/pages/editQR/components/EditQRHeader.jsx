@@ -1,13 +1,19 @@
+import { Undo2, Edit } from "lucide-react"
+import { useNavigate } from "react-router-dom"
+
 const EditQRHeader = ({ name }) => {
+
+const navigate = useNavigate();
+
   return (
     <header className="edit-qr-header">
       <div className="header-content">
         <div className="title-section">
-          <h1 className="page-title">Editar QR</h1>
-          <p className="page-subtitle">{name || "Nombre del QR"}</p>
+          <Edit size={18}/>
+          <h1 className="page-title">{name || "Nombre del QR"}</h1>
         </div>
 
-        <button className="btn-secondary">Volver</button>
+        <button onClick={() => navigate(-1)} className="btn-secondary"><Undo2 size={14}/></button>
       </div>
     </header>
   )

@@ -19,9 +19,6 @@ const TYPE_LABELS = {
 
 export default function Store({
   savedQRs,
-  onEdit,
-  onDelete,
-  onDuplicate,
   onCreateNew,
 }) {
   const [searchQuery, setSearchQuery] = useState("");
