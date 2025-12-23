@@ -6,58 +6,26 @@ import EditQRForm from "./components/EditQRForm";
 import EditQRPreview from "./components/EditQRPreview";
 
 import { useParams, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { getQRById, updateQR } from "@/services/qr.service";
+import { useEditQR } from "./hooks/useEditQR";
 
 function EditQR() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const [qrName, setQrName] = useState("");
-  const [loading, setLoading] = useState(true);
-  const [qrContent, setQrContent] = useState("");
-  const [qrColor, setQrColor] = useState("#000000");
-  const [bgColor, setBgColor] = useState("#ffffff");
-  const [shape, setShape] = useState("square");
-  const [logoEnabled, setLogoEnabled] = useState(false);
-
-  useEffect(() => {
-    if (!id) {
-      navigate("/store");
-      return;
-    }
-
-    async function loadQR() {
-      const data = await getQRById(id);
-
-      if (!data) {
-        navigate("/store");
-        return;
-      }
-
-      setQrName(data.name ?? "");
-      setQrContent(data.destination ?? "");
-      setQrColor(data.color ?? "#000000");
-      setBgColor(data.bgColor ?? "#ffffff");
-      setShape(data.shape ?? "square");
-      setLogoEnabled(data.logoEnabled ?? false);
-
-      setLoading(false);
-    }
-
-    loadQR();
-  }, [id, navigate]);
+  const {
+    loading,
+    qrName,
+    qrContent, setQrContent,
+    qrColor, setQrColor,
+    bgColor, setBgColor,
+    shape, setShape,
+    logoEnabled, setLogoEnabled,
+    saveQR
+  } = useEditQR(id, navigate);
 
   const handleSave = async () => {
     try {
-      await updateQR(id, {
-        destination: qrContent,
-        color: qrColor,
-        bgColor,
-        shape,
-        logoEnabled,
-      });
-
+      await saveQR();
       navigate("/store");
     } catch (err) {
       console.error("Error al guardar QR", err);
@@ -72,6 +40,13 @@ function EditQR() {
         <EditQRHeader name={qrName} />
 
         <main className="edit-qr-main">
+          <EditQRPreview
+            qrContent={qrContent}
+            qrColor={qrColor}
+            bgColor={bgColor}
+            shape={shape}
+          />
+
           <EditQRForm
             qrContent={qrContent}
             setQrContent={setQrContent}
@@ -83,13 +58,6 @@ function EditQR() {
             setShape={setShape}
             logoEnabled={logoEnabled}
             setLogoEnabled={setLogoEnabled}
-          />
-
-          <EditQRPreview
-            qrColor={qrColor}
-            bgColor={bgColor}
-            shape={shape}
-            logoEnabled={logoEnabled}
           />
         </main>
 

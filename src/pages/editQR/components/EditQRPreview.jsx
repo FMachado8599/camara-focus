@@ -1,17 +1,19 @@
-const EditQRPreview = ({ qrColor, bgColor, shape, logoEnabled }) => {
+import QRRenderer from "./QRRenderer";
+
+const EditQRPreview = ({ qrContent, qrColor, bgColor, shape }) => {
   return (
     <div className="preview-panel">
       <div className="preview-container">
         <div className="qr-preview" style={{ backgroundColor: bgColor }}>
           <div
             className={`qr-code-placeholder ${shape}`}
-            style={{ backgroundColor: qrColor }}
+            style={{ backgroundColor: bgColor }}
           >
-            {logoEnabled && (
-              <div className="qr-logo-overlay">
-                <div className="logo-circle"></div>
-              </div>
-            )}
+            <QRRenderer
+              value={qrContent}
+              color={qrColor}
+              bgColor={bgColor}
+            />
           </div>
         </div>
 
