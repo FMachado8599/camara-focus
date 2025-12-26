@@ -6,9 +6,25 @@ const EditQRForm = (props) => {
   return (
     <div className="edit-panel">
       <div className="edit-panel-scroll">
-        <ContentSection {...props} />
-        <AppearanceSection {...props} />
-        <LogoSection {...props} />
+        <ContentSection
+          setQrContent={setQrContent}
+        />
+        <AppearanceSection
+          qrColor={qrColor}
+          setQrColor={setQrColor}
+          bgColor={bgColor}
+          setBgColor={setBgColor}
+          size={size}
+          setSize={setSize}
+          errorLevel={errorLevel}
+          setErrorLevel={setErrorLevel}
+        />
+        <LogoSection
+          logoEnabled={logoEnabled}
+          setLogoEnabled={setLogoEnabled}
+          logoSize={logoSize}
+          setLogoSize={setLogoSize}
+        />
       </div>
     </div>
   )

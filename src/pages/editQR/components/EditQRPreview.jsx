@@ -4,6 +4,7 @@ const EditQRPreview = ({ qrContent, qrColor, bgColor, shape }) => {
   return (
     <div className="preview-panel">
       <div className="preview-container">
+        <h3 className="preview-label">Vista previa</h3>
         <div className="qr-preview" style={{ backgroundColor: bgColor }}>
           <div
             className={`qr-code-placeholder ${shape}`}
@@ -16,8 +17,6 @@ const EditQRPreview = ({ qrContent, qrColor, bgColor, shape }) => {
             />
           </div>
         </div>
-
-        <p className="preview-label">Vista previa</p>
       </div>
     </div>
   )

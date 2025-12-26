@@ -166,5 +166,16 @@
     background-color: #FECC00;
   }
 }
-
+@mixin qr-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: #151515;
+  box-shadow: 3px 3px 7px #080808,
+      -3px -3px 7px #222222;
+  border-radius: 1rem;
+  padding: 1.6rem;
+}
 

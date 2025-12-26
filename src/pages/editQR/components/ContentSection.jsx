@@ -1,18 +1,21 @@
+import Card from "@/components/UI/Card"
+
 const ContentSection = ({ qrContent, setQrContent }) => {
   return (
-    <div className="edit-card">
+    <Card className="edit-card">
       <h3 className="card-title">Contenido del QR</h3>
 
       <div className="form-group">
-        <label className="form-label">URL / Texto</label>
+        <label className="form-label">URL o texto</label>
         <input
           type="text"
           className="form-input"
           value={qrContent}
           onChange={(e) => setQrContent(e.target.value)}
+          placeholder="https://ejemplo.com"
         />
       </div>
-    </div>
+    </Card>
   )
 }
 

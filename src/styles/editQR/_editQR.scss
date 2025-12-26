@@ -51,6 +51,28 @@ $accent: #FECC00;
         }
     }
   }
+  & .edit-qr-main{
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    justify-content: center;
+    gap: 1.3rem;
+    & .preview-panel,.edit-panel{
+        background: rgba(33, 33, 33, 0.5);
+        padding: 1.6rem;
+        border-radius: 1rem
+    }
+    & .preview-panel{
+        & .preview-container{
+            & .qr-preview{
+                @include qr-container;
+            }
+        }
+    }
+    & .edit-panel{
+
+    }
+  }
   & .edit-qr-footer{
     display: flex;
     flex-direction: row;
