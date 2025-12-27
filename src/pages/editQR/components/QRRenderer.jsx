@@ -2,9 +2,11 @@ import { QRCodeSVG } from "qrcode.react";
 
 export default function QRRenderer({
   value,
-  color = "#000000",
-  bgColor = "#ffffff",
   size = 220,
+  fgColor = "#000000",
+  bgColor = "#ffffff",
+  level = "M",
+  imageSettings,
 }) {
   if (!value) {
     return (
@@ -19,9 +21,10 @@ export default function QRRenderer({
       <QRCodeSVG
         value={value}
         size={size}
-        fgColor={color}
+        fgColor={fgColor}
         bgColor={bgColor}
-        level="Q"
+        level={level}
+        imageSettings={imageSettings}
       />
     </div>
   );

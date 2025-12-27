@@ -63,6 +63,7 @@ $accent: #FECC00;
         border-radius: 1rem
     }
     & .preview-panel{
+        width: clamp(250px, 40vw, 400px);
         & .preview-container{
             & .qr-preview{
                 @include qr-container;

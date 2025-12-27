@@ -14,6 +14,7 @@
     "firebase-admin": "^13.6.0",
     "jsbarcode": "^3.12.1",
     "lucide-react": "^0.555.0",
+    "muller": "^1.1.0",
     "nanoid": "^5.1.6",
     "qrcode.react": "^4.2.0",
     "react": "^19.2.0",

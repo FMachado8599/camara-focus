@@ -1,4 +1,4 @@
-import Card from "@/components/UI/Card"
+import Card from "@/components/UI/Card";
 
 const ContentSection = ({ qrContent, setQrContent }) => {
   return (
@@ -12,11 +12,11 @@ const ContentSection = ({ qrContent, setQrContent }) => {
           className="form-input"
           value={qrContent}
           onChange={(e) => setQrContent(e.target.value)}
-          placeholder="https://ejemplo.com"
+          placeholder={qrContent || "https://example.com"}
         />
       </div>
     </Card>
-  )
-}
+  );
+};
 
-export default ContentSection
+export default ContentSection;

@@ -1,4 +1,4 @@
-import Card from "@/components/UI/Card"
+import Card from "@/components/UI/Card";
 
 export default function AppearanceSection({
   qrColor,
@@ -38,9 +38,9 @@ export default function AppearanceSection({
         <label className="form-label">Tamaño</label>
         <input
           type="range"
-          min={128}
-          max={512}
-          step={16}
+          min={100}
+          max={1000}
+          step={10}
           value={size}
           onChange={(e) => setSize(Number(e.target.value))}
         />
@@ -59,10 +59,7 @@ export default function AppearanceSection({
           <option value="Q">Alta</option>
           <option value="H">Máxima (recomendada para logo)</option>
         </select>
-        <p className="form-helper">
-          A mayor corrección, más tolerancia a modificaciones visuales.
-        </p>
       </div>
     </Card>
-  )
+  );
 }

@@ -15,12 +15,28 @@ function EditQR() {
   const {
     loading,
     qrName,
-    qrContent, setQrContent,
-    qrColor, setQrColor,
-    bgColor, setBgColor,
-    shape, setShape,
-    logoEnabled, setLogoEnabled,
-    saveQR
+    setQrName,
+    qrContent,
+    setQrContent,
+    qrColor,
+    setQrColor,
+    bgColor,
+    setBgColor,
+    shape,
+    setShape,
+    logoEnabled,
+    setLogoEnabled,
+    size,
+    setSize,
+    errorLevel,
+    setErrorLevel,
+    logoSize,
+    setLogoSize,
+    logoFile,
+    setLogoFile,
+    logoUrl,
+    setLogoUrl,
+    saveQR,
   } = useEditQR(id, navigate);
 
   const handleSave = async () => {
@@ -36,34 +52,50 @@ function EditQR() {
   if (loading) return <p>Cargando QR…</p>;
 
   return (
-      <div className="edit-qr-page">
-        <EditQRHeader name={qrName} />
+    <div className="edit-qr-page">
+      <EditQRHeader name={qrName} setQrName={setQrName} />
 
-        <main className="edit-qr-main">
-          <EditQRPreview
-            qrContent={qrContent}
-            qrColor={qrColor}
-            bgColor={bgColor}
-            shape={shape}
-          />
+      <main className="edit-qr-main">
+        <EditQRPreview
+          qrContent={qrContent}
+          qrColor={qrColor}
+          bgColor={bgColor}
+          shape={shape}
+          size={size}
+          errorLevel={errorLevel}
+          logoEnabled={logoEnabled}
+          logoSize={logoSize}
+          logoFile={logoFile}
+          logoUrl={logoUrl}
+        />
 
-          <EditQRForm
-            qrContent={qrContent}
-            setQrContent={setQrContent}
-            qrColor={qrColor}
-            setQrColor={setQrColor}
-            bgColor={bgColor}
-            setBgColor={setBgColor}
-            shape={shape}
-            setShape={setShape}
-            logoEnabled={logoEnabled}
-            setLogoEnabled={setLogoEnabled}
-          />
-        </main>
+        <EditQRForm
+          qrContent={qrContent}
+          setQrContent={setQrContent}
+          qrColor={qrColor}
+          setQrColor={setQrColor}
+          bgColor={bgColor}
+          setBgColor={setBgColor}
+          shape={shape}
+          setShape={setShape}
+          logoEnabled={logoEnabled}
+          setLogoEnabled={setLogoEnabled}
+          size={size}
+          setSize={setSize}
+          errorLevel={errorLevel}
+          setErrorLevel={setErrorLevel}
+          logoSize={logoSize}
+          setLogoSize={setLogoSize}
+          logoFile={logoFile}
+          setLogoFile={setLogoFile}
+          logoUrl={logoUrl}
+          setLogoUrl={setLogoUrl}
+        />
+      </main>
 
-        <EditQRFooter onSave={handleSave} />
-      </div>
-    );
-  }
+      <EditQRFooter onSave={handleSave} />
+    </div>
+  );
+}
 
 export default EditQR;
