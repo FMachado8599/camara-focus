@@ -18,6 +18,10 @@ const QRGen = ({ togglePanel, exportOptions, setExportOptions }) => {
   const [name, setName] = useState("");
   const svgRef = useRef(null);
   const { showToast } = useToast();
+  const [qrId, setQrId] = useState(null);
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
+
+
 
   const handleGenerate = async () => {
     if (text.trim() === "") {
@@ -25,6 +29,8 @@ const QRGen = ({ togglePanel, exportOptions, setExportOptions }) => {
       return;
     }
 
+    const id = generateQrId();
+    setQrId(id);
     setLoading(true);
     setShowQR(false);
     await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -33,11 +39,13 @@ const QRGen = ({ togglePanel, exportOptions, setExportOptions }) => {
   };
 
   const handleSaveQR = async () => {
+
+    if (!qrId) return;
+
     const svgString = serializeSvg(svgRef.current);
     console.log("SVG GUARDADO:", svgString.slice(0, 300));
-    const id = generateQrId();
 
-    await setDoc(doc(db, "qrs", id), {
+    await setDoc(doc(db, "qrs", qrId), {
       name: name || "Nuevo QR",
       type: "url",
       destination: text,
@@ -80,10 +88,10 @@ const QRGen = ({ togglePanel, exportOptions, setExportOptions }) => {
 
           {loading && <span className="loader"></span>}
 
-          {showQR && (
+          {showQR && qrId && (
             <QRCodeSVG
               ref={svgRef}
-              value={text}
+              value={`https://camara-focus.vercel.app/q/${qrId}`}
               bgColor="transparent"
               fgColor="#ffffff"
               id="qr-generated"

@@ -3,6 +3,7 @@ import App from "./App.jsx";
 import CreateQRTest from "./test/CreateQRTest.jsx";
 import StorePage from "./pages/store/StorePage.jsx";
 import EditQR from "./pages/editQR/EditQR.jsx";
+import QRRedirect from "./pages/QRRedirect.jsx";
 
 export default function AppRouter() {
   return (
@@ -12,6 +13,7 @@ export default function AppRouter() {
         <Route path="/test" element={<CreateQRTest />} />
         <Route path="/store" element={<StorePage />} />
         <Route path="/qr/:id/edit" element={<EditQR />} />
+        <Route path="/q/:id" element={<QRRedirect />} />
       </Routes>
     </BrowserRouter>
   );
