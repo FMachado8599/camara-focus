@@ -67,6 +67,7 @@ function EditQR() {
           logoSize={logoSize}
           logoFile={logoFile}
           logoUrl={logoUrl}
+          qrId={id}
         />
 
         <EditQRForm

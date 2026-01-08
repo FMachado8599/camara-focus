@@ -50,7 +50,7 @@ export default function StoreQRCard({
         <div className="qr-data-secondary">
           <p className="qr-dest neumorphic-badge">
             <Link2 size={14} />
-            {qr.destination}
+            <span className="qr-dest-text">{qr.destination}</span>
           </p>
           <p className="qr-date">
             <Calendar size={14} />
@@ -59,7 +59,7 @@ export default function StoreQRCard({
         </div>
       </div>
 
-      <StoreQRCardActions qr={qr} showToast={showToast} />
+      <StoreQRCardActions qr={qr} showToast={showToast} onDelete={onDelete} />
     </Card>
   );
 }

@@ -20,6 +20,7 @@ const TYPE_LABELS = {
 export default function Store({
   savedQRs,
   onCreateNew,
+  onDelete,
 }) {
   const [searchQuery, setSearchQuery] = useState("");
   const { showToast } = useToast();
@@ -57,6 +58,7 @@ export default function Store({
         hasSearch={!!searchQuery}
         onCreateNew={onCreateNew}
         showToast={showToast}
+        onDelete={onDelete}
       />
     </div>
   );

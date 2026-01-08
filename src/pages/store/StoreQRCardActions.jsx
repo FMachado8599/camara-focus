@@ -1,4 +1,5 @@
 import Button from "@/components/UI/Button";
+import ConfirmModal from "@/components/modals/ConfirmModal/ConfirmModal";
 import { Dropdown, DropdownItem } from "@/components/UI/Dropdown";
 import { Copy, Edit, Download, Trash2, Files } from "lucide-react";
 
@@ -8,14 +9,18 @@ import { useToast } from "@/context/ToastContext";
 import { deleteQR } from "@/services/qr.service";
 import { copyQRLink, downloadQR } from "@/utils/qrActions";
 
-export default function QRCardActions({ qr }) {
+import { useState } from "react";
+
+export default function QRCardActions({ qr, onDelete }) {
   const { showToast } = useToast();
+  const [actionsOpen, setActionsOpen] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const handleDelete = async () => {
-    if (!confirm("¿Seguro?")) return;
-
-    await deleteQR(qr.id);
+    deleteQR(qr.id);
+    onDelete(qr.id);
     showToast("QR eliminado");
+    setShowDeleteModal(false);
   };
 
   const handleDuplicate = () => {
@@ -23,7 +28,7 @@ export default function QRCardActions({ qr }) {
   };
 
   const handleCopyLink = () => {
-    navigator.clipboard.writeText(qr.destination);
+    copyQRLink(qr.destination)
     showToast("Enlace copiado");
   };
 
@@ -34,35 +39,47 @@ export default function QRCardActions({ qr }) {
     link.click();
   };
 
+  const showActions = () => {
+    setActionsOpen(prev => !prev);
+  }
+
   return (
     <div className="qr-actions">
       <Button className="qr-actions-download" onClick={handleDownload}>
         <Download size={14} /> Descargar
       </Button>
       <div className="qr-actions-sub">
-        <Link to={`/qr/${qr.id}/edit`} className="qr-edit-btn neumorphic-flat">
+        <div className="qr-actions-main" >
+          <Link to={`/qr/${qr.id}/edit`} className="qr-edit-btn neumorphic-flat">
           <Edit size={14} style={{ marginRight: 4 }} />
           Editar
-        </Link>
+          </Link>
+          <Button onClick={showActions} className="qr-actions-trigger neumorphic-flat">•••</Button>
+        </div>
+        <div className={`qr-actions-secondary ${actionsOpen ? "open" : ""}`}>
+          <Button onClick={handleCopyLink}>
+            <Copy size={14} />
+          </Button>
 
-        <Dropdown
-          trigger={
-            <Button className="dropdown-trigger neumorphic-flat">•••</Button>
-          }
-        >
-          <DropdownItem onClick={() => copyQRLink(qr.destination)}>
-            <Copy size={14} /> Copiar enlace
-          </DropdownItem>
+          <Button onClick={handleDuplicate}>
+            <Files size={14} />
+          </Button>
 
-          <DropdownItem onClick={handleDuplicate}>
-            <Files size={14} /> Duplicar
-          </DropdownItem>
-
-          <DropdownItem onClick={handleDelete} className="danger">
-            <Trash2 size={14} /> Eliminar
-          </DropdownItem>
-        </Dropdown>
+          <Button onClick={() => setShowDeleteModal(true)} className="danger">
+            <Trash2 size={14} />
+          </Button>
+        </div>
       </div>
+      <ConfirmModal
+        open={showDeleteModal}
+        title="Eliminar QR"
+        description="Este QR se eliminará definitivamente. No hay vuelta atrás."
+        confirmText="Eliminar"
+        cancelText="Cancelar"
+        danger
+        onCancel={() => setShowDeleteModal(false)}
+        onConfirm={handleDelete}
+      />
     </div>
   );
 }

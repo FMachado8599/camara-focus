@@ -1,6 +1,8 @@
 import QRRenderer from "./QRRenderer";
+const QR_BASE_URL = import.meta.env.VITE_QR_BASE_URL;
 
 function EditQRPreview({
+  id,
   qrContent,
   qrColor,
   bgColor,
@@ -23,7 +25,7 @@ function EditQRPreview({
             style={{ backgroundColor: bgColor }}
           >
             <QRRenderer
-              value={qrContent || " "}
+              value={`${QR_BASE_URL}/q/${qrId}`}
               size={PREVIEW_SIZE}
               fgColor={qrColor}
               bgColor={bgColor}

@@ -6,7 +6,7 @@ const ContentSection = ({ qrContent, setQrContent }) => {
       <h3 className="card-title">Contenido del QR</h3>
 
       <div className="form-group">
-        <label className="form-label">URL o texto</label>
+        <label className="form-label">Destino <span>(URL) </span></label>
         <input
           type="text"
           className="form-input"
