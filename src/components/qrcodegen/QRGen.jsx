@@ -10,6 +10,7 @@ import { db } from "../../lib/firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { useToast } from "@/context/ToastContext";
 import "@/styles/gen-cards/_genCard.scss";
+const QR_BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const QRGen = ({ togglePanel, exportOptions, setExportOptions }) => {
   const [text, setText] = useState("");
@@ -19,7 +20,6 @@ const QRGen = ({ togglePanel, exportOptions, setExportOptions }) => {
   const svgRef = useRef(null);
   const { showToast } = useToast();
   const [qrId, setQrId] = useState(null);
-  const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 
 
@@ -91,7 +91,7 @@ const QRGen = ({ togglePanel, exportOptions, setExportOptions }) => {
           {showQR && qrId && (
             <QRCodeSVG
               ref={svgRef}
-              value={`https://camara-focus.vercel.app/q/${qrId}`}
+              value={`${QR_BASE_URL}/q/${qrId}`}
               bgColor="transparent"
               fgColor="#ffffff"
               id="qr-generated"

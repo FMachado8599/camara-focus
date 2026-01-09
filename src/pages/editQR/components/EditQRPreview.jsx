@@ -1,8 +1,8 @@
 import QRRenderer from "./QRRenderer";
-const QR_BASE_URL = import.meta.env.VITE_QR_BASE_URL;
+const QR_BASE_URL = import.meta.env.VITE_BASE_URL;
 
 function EditQRPreview({
-  id,
+  qrId,
   qrContent,
   qrColor,
   bgColor,

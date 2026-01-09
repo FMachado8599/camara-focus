@@ -5,8 +5,8 @@ import OptionsPanel from "./OptionsPanel";
 export default function QRGeneratorBlock() {
   const [optionsOpen, setOptionsOpen] = useState(true);
   const [exportOptions, setExportOptions] = useState({
-    format: "png",
-    size: 150,
+    format: "svg",
+    size: 1000,
     margin: 0,
     fgColor: "#000000",
     bgColor: "#FFFFFF",

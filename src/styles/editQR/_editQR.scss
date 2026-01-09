@@ -303,6 +303,7 @@ $thumb-bg: #0f0f0f;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    margin-top: 2rem;
     gap: 2rem;
     & .cancel-button{
         @include btn-dark;
