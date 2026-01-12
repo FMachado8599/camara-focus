@@ -29,3 +29,6 @@ dist-ssr
 
 .vercel
 .env*.local
+firebase-key.json
+
+apple_emojis_png/
