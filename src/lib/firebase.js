@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 
 // Configuración del FRONTEND — NO del admin
 const firebaseConfig = {
@@ -15,5 +16,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 // Exportamos Firestore versión frontend
+
 export const db = getFirestore(app);
+export const storage = getStorage(app);
 
