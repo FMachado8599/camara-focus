@@ -24,6 +24,7 @@ export default function Store({
 }) {
   const [searchQuery, setSearchQuery] = useState("");
   const { showToast } = useToast();
+  const title = "Mis QRs" 
 
   const filteredQRs = savedQRs.filter((qr) =>
     `${qr.name ?? ""}${qr.type ?? ""}${qr.destination ?? ""}`
@@ -50,6 +51,7 @@ export default function Store({
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
           onCreateNew={onCreateNew}
+          title={title}
         />
       </div>
 

@@ -1,11 +1,66 @@
-.emoji-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
-  gap: 16px;
-  grid-template-rows: 72px;
-  & img {
-    width: 64px;
-    height: 64px;
-    object-fit: contain;
+.emoji-library-container {
+  width: 100%;
+  max-width: 1250px;
+  margin: 0 auto;
+  padding: 1rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+
+  & .emoji-grid {
+    width: 100%;
+    display: grid;
+
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(72px, 1fr)
+    );
+
+    gap: 16px;
+    justify-items: center;
+
+    & .emoji-container {
+      width: 72px;
+      height: 72px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      overflow: hidden;
+      transition: all .2s ease-in-out;
+      border-radius: .6rem;
+      &:hover {
+        transform: scale(1.08);
+        background-color: #202020;
+      }
+
+      & .emoji {
+        width: 64px;
+        height: 64px;
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1/1;
+        object-fit: contain;
+        pointer-events: none;
+      }
+    }
+    & .skeleton {
+      width: 72px;
+      height: 72px;
+      border-radius: 12px;
+      background-color: #202020;
+      animation: shimmer 2s infinite ease-in-out;
+    }
+
+    @keyframes shimmer {
+      0% { opacity: 100%; }
+      50% { opacity: 5%; }
+      100% { opacity: 100%; }
+    }
+  }
 }
-}
+
+

@@ -6,18 +6,20 @@ import { Plus, Search, Undo2 } from "lucide-react";
 
 import "@/styles/store/_storeTopbar.scss";
 
-function StoreTopbar({ searchQuery, setSearchQuery, onCreateNew }) {
+function StoreTopbar({ searchQuery, setSearchQuery, onCreateNew, title }) {
   return (
     <div className="store-topbar ">
       <Link to="/">
        <Undo2 size={14} />
       </Link>
-      <h1 className="topbar-title">Mis QRs</h1>
+      <h1 className="topbar-title">{title}</h1>
 
       <div className="search-section">
-        <Button onClick={onCreateNew} className="add-code">
-          <Plus size={14} className="plus" />
-        </Button>
+        {onCreateNew && (
+          <Button onClick={onCreateNew} className="add-code">
+            <Plus size={14} className="plus" />
+          </Button>
+        )}
         <div className="search-bar">
           <Search className="search-icon" size={14} />
           <Input
