@@ -1,20 +1,27 @@
 import { useEffect, useState, useRef } from "react";
 import { loadEmojisPage } from "@/services/emojis.service";
-import "@/styles/emoji-library/_emojiLibrary.scss";
+import { searchEmojis } from "./searchEmojis";
 
+import "@/styles/emoji-library/_emojiLibrary.scss";
 import StoreTopbar from "@/pages/store/StoreTopbar";
 
 export default function EmojiLibrary() {
   const [emojis, setEmojis] = useState([]);
   const [lastDoc, setLastDoc] = useState(null);
   const [loading, setLoading] = useState(false);
+
   const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [searching, setSearching] = useState(false);
 
   const hasLoadedRef = useRef(false);
   const title = "Emojis";
 
+  /* =========================
+     CARGA INICIAL / PAGINADA
+     ========================= */
   const loadMore = async () => {
-    if (loading) return;
+    if (loading || searchQuery) return;
 
     setLoading(true);
 
@@ -37,17 +44,33 @@ export default function EmojiLibrary() {
     loadMore();
   }, []);
 
-  const normalizedQuery = searchQuery.toLowerCase().trim();
+  /* =========================
+     BÚSQUEDA EN FIRESTORE
+     ========================= */
+  useEffect(() => {
+    const q = searchQuery.trim().toLowerCase();
 
-  const filteredEmojis = emojis.filter((e) => {
-    if (!normalizedQuery) return true;
+    if (!q) {
+      setSearchResults([]);
+      setSearching(false);
+      return;
+    }
 
-    return (
-      e.name?.toLowerCase().includes(normalizedQuery) ||
-      e.category?.toLowerCase().includes(normalizedQuery) ||
-      e.keywords?.some((k) => k.toLowerCase().includes(normalizedQuery))
-    );
-  });
+    setSearching(true);
+
+    const t = setTimeout(async () => {
+      const res = await searchEmojis(q);
+      setSearchResults(res);
+      setSearching(false);
+    }, 300);
+
+    return () => clearTimeout(t);
+  }, [searchQuery]);
+
+  /* =========================
+     LISTA A RENDERIZAR
+     ========================= */
+  const listToRender = searchQuery.trim() !== "" ? searchResults : emojis;
 
   return (
     <div className="emoji-library-container">
@@ -57,6 +80,7 @@ export default function EmojiLibrary() {
         title={title}
       />
 
+      {/* Skeleton inicial */}
       {loading && emojis.length === 0 && (
         <div className="emoji-grid">
           {Array.from({ length: 40 }).map((_, i) => (
@@ -65,8 +89,18 @@ export default function EmojiLibrary() {
         </div>
       )}
 
+      {/* Skeleton búsqueda */}
+      {searching && (
+        <div className="emoji-grid">
+          {Array.from({ length: 20 }).map((_, i) => (
+            <div key={i} className="emoji-container skeleton" />
+          ))}
+        </div>
+      )}
+
+      {/* Grid real */}
       <div className="emoji-grid">
-        {filteredEmojis.map((e) => (
+        {listToRender.map((e) => (
           <div key={e.id} className="emoji-container">
             {e.url ? (
               <img className="emoji" src={e.url} alt={e.name} />
@@ -77,9 +111,12 @@ export default function EmojiLibrary() {
         ))}
       </div>
 
-      <button onClick={loadMore} disabled={loading || !lastDoc}>
-        {loading ? "Cargando…" : "Cargar más"}
-      </button>
+      {/* Paginación SOLO sin búsqueda */}
+      {!searchQuery && (
+        <button onClick={loadMore} disabled={loading || !lastDoc}>
+          {loading ? "Cargando…" : "Cargar más"}
+        </button>
+      )}
     </div>
   );
 }
