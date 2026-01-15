@@ -8,86 +8,136 @@
   flex-direction: column;
   gap: 1.5rem;
   align-items: center;
-  & .emojis-main{
+
+  & .emojis-main {
     display: grid;
-    grid-template-columns: minmax(200px,300px) 1fr;
+    grid-template-columns: minmax(200px, 300px) 1fr;
     width: clamp(300px, 100%, 1250px);
     gap: 1rem;
-    & .emoji-categories{
+
+    & .emoji-categories {
       display: flex;
       flex-direction: column;
-      gap: .3rem;
-      & .emoji-category{
+      gap: 0.3rem;
+
+      & .emoji-category {
         text-align: start;
         width: 100%;
         background-color: transparent;
         font-size: 14px;
-        &:hover{
+
+        &:hover {
           background-color: #303030;
         }
       }
     }
-    & .emojis-displays{
+
+    & .emojis-displays {
       display: flex;
       flex-direction: column;
       width: 100%;
+
       & .emoji-grid {
         width: 100%;
         display: grid;
-
-        grid-template-columns: repeat(
-          auto-fill,
-          minmax(72px, 1fr)
-        );
-
-        gap: 16px;
+        grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+        grid-auto-rows: 72px;
+        gap: 0.3rem;
         justify-items: center;
 
-        & .emoji-container {
+        & .emoji-container,
+        & .skeleton {
           width: 72px;
           height: 72px;
-          padding: .3rem;
-          padding-bottom: .6rem;
-
+          border-radius: 12px;
           display: flex;
           align-items: center;
           justify-content: center;
-
+          position: relative;
           overflow: hidden;
-          transition: all .2s ease-in-out;
-          border-radius: .6rem;
+        }
+
+        & .emoji-container {
+          padding: 0.3rem 0.3rem 0.6rem;
           cursor: pointer;
+          transition: transform 0.2s ease, background-color 0.2s ease;
+
+          opacity: 0;
+          transform: scale(0.96);
+          animation: emojiFadeIn 0.25s ease-out forwards;
+          filter: drop-shadow(0 0 10px transparent);
+          overflow: visible;
+
+          &.copying {
+            pointer-events: none;
+            filter: drop-shadow(0 0 10px #fecc00);
+          }
+
           &:hover {
             transform: scale(1.08);
             background-color: #202020;
           }
 
+          & .emoji-spinner-overlay {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            background-color: rgb(from #202020 r g b / 80%);
+            border-radius: .5rem;
+
+            & .emoji-loader {
+              width: 24px;
+              height: 24px;
+              border: 3px solid #fff;
+              border-bottom-color: #fecc00;
+              border-radius: 50%;
+              box-sizing: border-box;
+              animation: rotation 1s linear infinite;
+            }
+          }
+
           & .emoji {
-            width: 64px;
-            height: 64px;
             width: 100%;
-            height: auto;
-            aspect-ratio: 1/1;
+            aspect-ratio: 1 / 1;
             object-fit: contain;
             pointer-events: none;
           }
         }
+
         & .skeleton {
-          width: 72px;
-          height: 72px;
-          border-radius: 12px;
           background-color: #202020;
           animation: shimmer 2s infinite ease-in-out;
-        }
-
-        @keyframes shimmer {
-          0% { opacity: 100%; }
-          50% { opacity: 5%; }
-          100% { opacity: 100%; }
         }
       }
     }
   }
 }
 
+@keyframes emojiFadeIn {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
 
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.05;
+  }
+  100% {
+    opacity: 1;
+  }
+}

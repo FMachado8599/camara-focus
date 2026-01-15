@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { loadEmojisPage } from "@/services/emojis.service";
 import { searchEmojis } from "./searchEmojis";
 import { EMOJI_CATEGORIES } from "./documents/emojisDocs";
@@ -21,25 +21,38 @@ export default function EmojiLibrary() {
     EMOJI_CATEGORIES[0]
   );
   const { showToast } = useToast();
+  const [copyingId, setCopyingId] = useState(null);
 
   /* =========================
      CARGA INICIAL / PAGINADA
      ========================= */
 
   useEffect(() => {
+    let cancelled = false;
+
     const load = async () => {
-      setLoading(true);
+      try {
+        const data = await loadEmojisPage({
+          category: activeCategory,
+        });
 
-      const emojis = await loadEmojisPage({
-        category: activeCategory,
-      });
-
-      setEmojis(emojis);
-      setLoading(false);
+        if (!cancelled) {
+          setEmojis(data);
+        }
+      } finally {
+        if (!cancelled) {
+          setLoading(false);
+        }
+      }
     };
 
     load();
+
+    return () => {
+      cancelled = true;
+    };
   }, [activeCategory]);
+
 
   /* =========================
      BÚSQUEDA EN FIRESTORE
@@ -64,18 +77,55 @@ export default function EmojiLibrary() {
     return () => clearTimeout(t);
   }, [searchQuery]);
 
-  const listToRender = searchQuery.trim() !== "" ? searchResults : emojis;
-  
   const handleCopyEmoji = async (emoji) => {
-    if (loading) return;
+    if (loading || copyingId) return;
+
+    setCopyingId(emoji.id);
 
     const ok = await copyEmojiPngToClipboard(emoji.codepoint);
+
     showToast(
       ok ? "Emoji copiado al portapapeles" : "No se pudo copiar el emoji",
       ok ? "success" : "error"
     );
+
+    setCopyingId(null);
   };
 
+  const handleCategories = (cat) => {
+      if (cat === activeCategory) return;
+
+      setActiveCategory(cat);
+      setEmojis([]);
+      setLoading(true);
+
+      requestAnimationFrame(() => {
+        document
+          .querySelector(".emojis-displays")
+          ?.scrollTo({ top: 0, behavior: "smooth" });
+      }); 
+  }
+
+
+  const filteredEmojis = useMemo(() => {
+    const q = searchQuery.trim().toLowerCase();
+    if (!q) return emojis;
+
+    return emojis.filter((e) => {
+      // ajustá estos campos a lo que tengas en Firestore
+      const haystack = [
+        e.name,
+        e.keywords?.join(" "),
+        e.keywords_es?.join(" "),
+        e.codepoint,
+      ]
+        .filter(Boolean)
+        .join(" ")
+        .toLowerCase();
+
+      return haystack.includes(q);
+    });
+  }, [emojis, searchQuery]);
 
 
   return (
@@ -93,7 +143,7 @@ export default function EmojiLibrary() {
               key={cat}
               className={`emoji-category ${cat === activeCategory ? "active" : ""}`}
 
-              onClick={() => setActiveCategory(cat)}
+              onClick={() => handleCategories(cat)}
             >
               {cat}
             </button>
@@ -103,7 +153,7 @@ export default function EmojiLibrary() {
           {/* Skeleton inicial */}
           {loading && emojis.length === 0 && (
             <div className="emoji-grid">
-              {Array.from({ length: 40 }).map((_, i) => (
+              {Array.from({ length: 100 }).map((_, i) => (
                 <div key={i} className="emoji-container skeleton" />
               ))}
             </div>
@@ -120,7 +170,7 @@ export default function EmojiLibrary() {
 
           {/* Grid real */}
           <div className="emoji-grid">
-            {listToRender
+            {filteredEmojis
               .filter(e => e.url) // 👈 si no hay imagen, no existe
               .map(e => (
                 <div
@@ -129,6 +179,11 @@ export default function EmojiLibrary() {
                   onClick={() => handleCopyEmoji(e)}
                 >
                   <img className="emoji" src={e.url} alt={e.name} />
+                  {copyingId === e.id && (
+                    <div className="emoji-spinner-overlay">
+                      <span class="emoji-loader"></span>
+                    </div>
+                  )}
                 </div>
               ))}
           </div>

@@ -9,3 +9,16 @@ export const EMOJI_CATEGORIES = [
   "Symbols",
   "Flags",
 ];
+export const CATEGORY_LABELS = {
+  "Smileys & Emotion": "Caritas y emociones",
+  "People & Body": "Personas y cuerpo",
+  "Animals & Nature": "Animales y naturaleza",
+  "Food & Drink": "Comida y bebida",
+  "Travel & Places": "Viajes y lugares",
+  "Activities": "Actividades",
+  "Objects": "Objetos",
+  "Symbols": "Símbolos",
+  "Flags": "Banderas",
+};
+
+
