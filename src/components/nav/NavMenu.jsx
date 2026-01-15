@@ -17,9 +17,9 @@ function NavMenu() {
                         Iconos
                     </Link>
                 </div>
-                <div className="menu-links">
+                <div className="menu-links enabled">
                     <Smile size={16} />
-                    <Link to="/store" onClick={() => setOpen(false)}>
+                    <Link to="/emojis" onClick={() => setOpen(false)}>
                         Emojis
                     </Link>
                 </div>

@@ -8,57 +8,84 @@
   flex-direction: column;
   gap: 1.5rem;
   align-items: center;
-
-  & .emoji-grid {
-    width: 100%;
+  & .emojis-main{
     display: grid;
-
-    grid-template-columns: repeat(
-      auto-fill,
-      minmax(72px, 1fr)
-    );
-
-    gap: 16px;
-    justify-items: center;
-
-    & .emoji-container {
-      width: 72px;
-      height: 72px;
-
+    grid-template-columns: minmax(200px,300px) 1fr;
+    width: clamp(300px, 100%, 1250px);
+    gap: 1rem;
+    & .emoji-categories{
       display: flex;
-      align-items: center;
-      justify-content: center;
-
-      overflow: hidden;
-      transition: all .2s ease-in-out;
-      border-radius: .6rem;
-      &:hover {
-        transform: scale(1.08);
-        background-color: #202020;
-      }
-
-      & .emoji {
-        width: 64px;
-        height: 64px;
+      flex-direction: column;
+      gap: .3rem;
+      & .emoji-category{
+        text-align: start;
         width: 100%;
-        height: auto;
-        aspect-ratio: 1/1;
-        object-fit: contain;
-        pointer-events: none;
+        background-color: transparent;
+        font-size: 14px;
+        &:hover{
+          background-color: #303030;
+        }
       }
     }
-    & .skeleton {
-      width: 72px;
-      height: 72px;
-      border-radius: 12px;
-      background-color: #202020;
-      animation: shimmer 2s infinite ease-in-out;
-    }
+    & .emojis-displays{
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      & .emoji-grid {
+        width: 100%;
+        display: grid;
 
-    @keyframes shimmer {
-      0% { opacity: 100%; }
-      50% { opacity: 5%; }
-      100% { opacity: 100%; }
+        grid-template-columns: repeat(
+          auto-fill,
+          minmax(72px, 1fr)
+        );
+
+        gap: 16px;
+        justify-items: center;
+
+        & .emoji-container {
+          width: 72px;
+          height: 72px;
+          padding: .3rem;
+          padding-bottom: .6rem;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          overflow: hidden;
+          transition: all .2s ease-in-out;
+          border-radius: .6rem;
+          cursor: pointer;
+          &:hover {
+            transform: scale(1.08);
+            background-color: #202020;
+          }
+
+          & .emoji {
+            width: 64px;
+            height: 64px;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 1/1;
+            object-fit: contain;
+            pointer-events: none;
+          }
+        }
+        & .skeleton {
+          width: 72px;
+          height: 72px;
+          border-radius: 12px;
+          background-color: #202020;
+          animation: shimmer 2s infinite ease-in-out;
+        }
+
+        @keyframes shimmer {
+          0% { opacity: 100%; }
+          50% { opacity: 5%; }
+          100% { opacity: 100%; }
+        }
+      }
     }
   }
 }

@@ -4,7 +4,7 @@ import CreateQRTest from "./test/CreateQRTest.jsx";
 import StorePage from "./pages/store/StorePage.jsx";
 import EditQR from "./pages/editQR/EditQR.jsx";
 import QRRedirect from "./pages/QRRedirect.jsx";
-import Emojis from "./features/emoji-library.jsx";
+import Emojis from "./pages/emojis/EmojisPage.jsx";
 
 export default function AppRouter() {
   return (

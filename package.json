@@ -20,6 +20,7 @@
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-router-dom": "^7.10.1",
+    "sharp": "^0.34.5",
     "vercel": "^50.0.0"
   },
   "devDependencies": {
@@ -33,5 +34,18 @@
     "globals": "^16.5.0",
     "sass": "^1.94.2",
     "vite": "^7.2.4"
-  }
+  },
+  "description": "This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.",
+  "main": "eslint.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FMachado8599/camara-focus.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FMachado8599/camara-focus/issues"
+  },
+  "homepage": "https://github.com/FMachado8599/camara-focus#readme"
 }
