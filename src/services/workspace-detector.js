@@ -1,3 +1,13 @@
+export function isWindows() {
+  // Método moderno
+  if (navigator.userAgentData?.platform) {
+    return navigator.userAgentData.platform === "Windows";
+  }
+
+  // Fallback legacy
+  return /windows/i.test(navigator.userAgent);
+}
+
 export function shouldDownloadInsteadOfCopy() {
   const ua = navigator.userAgent.toLowerCase();
 
@@ -6,7 +16,7 @@ export function shouldDownloadInsteadOfCopy() {
 
   const isFirefox = ua.includes("firefox");
 
-  const isWindows = ua.includes("windows");
+  const isWin = isWindows();
 
   const isChromium = ua.includes("chrome") || ua.includes("edg");
 
@@ -14,7 +24,7 @@ export function shouldDownloadInsteadOfCopy() {
   if (isSafari || isFirefox) return true;
 
   // Windows sin Chromium: descargar
-  if (isWindows && !isChromium) return true;
+  if (isWin && !isChromium) return true;
 
   return false; // copiar permitido
 }

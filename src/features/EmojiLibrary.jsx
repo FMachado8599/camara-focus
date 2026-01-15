@@ -107,13 +107,13 @@ export default function EmojiLibrary() {
       const res = await copyOrDownloadEmoji(emoji.codepoint);
 
       if (res.mode === "clipboard") {
-        showToast("Emoji copiado al portapapeles", "success");
+        showToast("Emoji copiado al portapapeles", "success", 3000);
       } else {
-        showToast("Descargamos el emoji (tu navegador no permite copiar imágenes)", "success");
+        showToast("Descargamos el emoji (tu navegador no permite copiar imágenes)", "success", 5000);
       }
     } catch (err) {
       console.error(err);
-      showToast("No se pudo copiar ni descargar el emoji", "error");
+      showToast("No se pudo copiar ni descargar el emoji", "error", 5000);
     } finally {
       el?.classList.remove("copying");
       setCopyingId(null);
