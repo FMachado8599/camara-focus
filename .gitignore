@@ -32,3 +32,5 @@ dist-ssr
 firebase-key.json
 
 apple_emojis_png/
+apple_emojis_webp/
+apple_emojis_webp_placeholders/
