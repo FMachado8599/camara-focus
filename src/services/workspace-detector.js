@@ -8,26 +8,42 @@ export function isWindows() {
   return /windows/i.test(navigator.userAgent);
 }
 
-export function shouldDownloadInsteadOfCopy() {
+function isSafari() {
   const ua = navigator.userAgent.toLowerCase();
-
-  const isSafari =
-    ua.includes("safari") && !ua.includes("chrome") && !ua.includes("chromium");
-
-  const isFirefox = ua.includes("firefox");
-
-  const isWin = isWindows();
-
-  const isChromium = ua.includes("chrome") || ua.includes("edg");
-
-  // Safari o Firefox: siempre descargar
-  if (isSafari || isFirefox) return true;
-
-  // Windows sin Chromium: descargar
-  if (isWin && !isChromium) return true;
-
-  return false; // copiar permitido
+  return ua.includes("safari") && !ua.includes("chrome") && !ua.includes("chromium");
 }
+
+function isFirefox() {
+  return /firefox/i.test(navigator.userAgent);
+}
+
+function isChromium() {
+  const ua = navigator.userAgent.toLowerCase();
+  return ua.includes("chrome") || ua.includes("chromium") || ua.includes("edg");
+}
+
+
+export function shouldDownloadInsteadOfCopy() {
+  const windows = isWindows();
+  const safari = isSafari();
+  const firefox = isFirefox();
+  const chromium = isChromium();
+
+  if (windows) {
+    return true; // Windows nunca copia
+  }
+
+  if (safari || firefox) {
+    return true; // En Mac/Linux, Safari y Firefox descargan
+  }
+
+  if (chromium) {
+    return false; // En Mac/Linux, Chromium copia
+  }
+
+  return true;
+}
+
 
 export function downloadBlob(blob, filename = "emoji.png") {
   const url = URL.createObjectURL(blob);
