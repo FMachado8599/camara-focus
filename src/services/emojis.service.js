@@ -5,7 +5,7 @@ import {
   orderBy,
   where,
 } from "firebase/firestore";
-import { ref, getDownloadURL } from "firebase/storage";
+import { ref, getDownloadURL, getBlob } from "firebase/storage";
 import { db, storage } from "@/lib/firebase";
 
 // =========================
