@@ -155,9 +155,8 @@ export async function copyEmojiPngToClipboard(codepoint) {
     const normalized = normalizeCodepointForAssets(codepoint);
     const pngPath = `emojis/apple/${normalized}.png`;
 
-    const url = await getDownloadURL(ref(storage, pngPath));
-    const res = await fetch(url);
-    const blob = await res.blob();
+    const storageRef = ref(storage, pngPath);
+    const blob = await getBlob(storageRef);
 
     await navigator.clipboard.write([
       new ClipboardItem({
