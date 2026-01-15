@@ -77,20 +77,32 @@ export default function EmojiLibrary() {
     return () => clearTimeout(t);
   }, [searchQuery]);
 
-  const handleCopyEmoji = async (emoji) => {
+  const handleCopyEmoji = (ev, emoji) => {
     if (loading || copyingId) return;
 
+    const el = ev.currentTarget;
+    if (!el) return;
+
+    el.classList.add("copying");
     setCopyingId(emoji.id);
 
-    const ok = await copyEmojiPngToClipboard(emoji.codepoint);
-
-    showToast(
-      ok ? "Emoji copiado al portapapeles" : "No se pudo copiar el emoji",
-      ok ? "success" : "error"
-    );
-
-    setCopyingId(null);
+    copyEmojiAsync(el, emoji);
   };
+
+  const copyEmojiAsync = async (el, emoji) => {
+    try {
+      const ok = await copyEmojiPngToClipboard(emoji.codepoint);
+
+      showToast(
+        ok ? "Emoji copiado al portapapeles" : "No se pudo copiar el emoji",
+        ok ? "success" : "error"
+      );
+    } finally {
+      setCopyingId(null);
+      el?.classList.remove("copying");
+    }
+  };
+
 
   const handleCategories = (cat) => {
       if (cat === activeCategory) return;
@@ -176,7 +188,7 @@ export default function EmojiLibrary() {
                 <div
                   key={e.id}
                   className="emoji-container"
-                  onClick={() => handleCopyEmoji(e)}
+                  onClick={(ev) => handleCopyEmoji(ev, e)}
                 >
                   <img className="emoji" src={e.url} alt={e.name} />
                   {copyingId === e.id && (
