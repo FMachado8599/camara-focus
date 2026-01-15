@@ -3,7 +3,8 @@
     "origin": [
       "http://localhost:5173",
       "https://camara-focus.web.app",
-      "https://camara-focus.firebaseapp.com"
+      "https://camara-focus.firebaseapp.com",
+      "https://camara-focus.vercel.app"
     ],
     "method": ["GET"],
     "responseHeader": ["Content-Type"],
