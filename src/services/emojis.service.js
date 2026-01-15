@@ -7,6 +7,7 @@ import {
 } from "firebase/firestore";
 import { ref, getDownloadURL, getBlob } from "firebase/storage";
 import { db, storage } from "@/lib/firebase";
+import { downloadBlob, shouldDownloadInsteadOfCopy } from "./workspace-detector";
 
 // =========================
 // Utils
@@ -150,24 +151,45 @@ export async function loadEmojisPage({ category }) {
 // =========================
 // Copy PNG to clipboard
 // =========================
-export async function copyEmojiPngToClipboard(codepoint) {
-  try {
-    const normalized = normalizeCodepointForAssets(codepoint);
-    const pngPath = `emojis/apple/${normalized}.png`;
+// export async function copyEmojiPngToClipboard(codepoint) {
+//   try {
+//     const normalized = normalizeCodepointForAssets(codepoint);
+//     const pngPath = `emojis/apple/${normalized}.png`;
 
-    const storageRef = ref(storage, pngPath);
-    const blob = await getBlob(storageRef);
+//     const storageRef = ref(storage, pngPath);
+//     const blob = await getBlob(storageRef);
 
-    await navigator.clipboard.write([
-      new ClipboardItem({
-        [blob.type]: blob,
-      }),
-    ]);
+//     await navigator.clipboard.write([
+//       new ClipboardItem({
+//         [blob.type]: blob,
+//       }),
+//     ]);
 
-    return true;
-  } catch (err) {
-    console.error("Error copiando emoji:", err);
-    return false;
+//     return true;
+//   } catch (err) {
+//     console.error("Error copiando emoji:", err);
+//     return false;
+//   }
+// }
+
+// =========================
+// Copy PNG to clipboard CON DOWNLOAD
+// =========================
+
+export async function copyOrDownloadEmoji(codepoint) {
+  const normalized = normalizeCodepointForAssets(codepoint);
+  const path = `emojis/apple/${normalized}.png`;
+
+  const blob = await getBlob(ref(storage, path));
+
+  if (shouldDownloadInsteadOfCopy()) {
+    downloadBlob(blob, `${normalized}.png`);
+    return { mode: "download" };
   }
-}
 
+  await navigator.clipboard.write([
+    new ClipboardItem({ [blob.type]: blob }),
+  ]);
+
+  return { mode: "clipboard" };
+}

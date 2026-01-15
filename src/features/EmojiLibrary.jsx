@@ -89,19 +89,37 @@ export default function EmojiLibrary() {
     copyEmojiAsync(el, emoji);
   };
 
+  // const copyEmojiAsync = async (el, emoji) => {
+  //   try {
+  //     const ok = await copyEmojiPngToClipboard(emoji.codepoint);
+
+  //     showToast(
+  //       ok ? "Emoji copiado al portapapeles" : "No se pudo copiar el emoji",
+  //       ok ? "success" : "error"
+  //     );
+  //   } finally {
+  //     setCopyingId(null);
+  //     el?.classList.remove("copying");
+  //   }
+  // };
   const copyEmojiAsync = async (el, emoji) => {
     try {
-      const ok = await copyEmojiPngToClipboard(emoji.codepoint);
+      const res = await copyOrDownloadEmoji(emoji.codepoint);
 
-      showToast(
-        ok ? "Emoji copiado al portapapeles" : "No se pudo copiar el emoji",
-        ok ? "success" : "error"
-      );
+      if (res.mode === "clipboard") {
+        showToast("Emoji copiado al portapapeles", "success");
+      } else {
+        showToast("Descargamos el emoji (tu navegador no permite copiar imágenes)", "success");
+      }
+    } catch (err) {
+      console.error(err);
+      showToast("No se pudo copiar ni descargar el emoji", "error");
     } finally {
-      setCopyingId(null);
       el?.classList.remove("copying");
+      setCopyingId(null);
     }
   };
+
 
 
   const handleCategories = (cat) => {
@@ -193,7 +211,7 @@ export default function EmojiLibrary() {
                   <img className="emoji" src={e.url} alt={e.name} />
                   {copyingId === e.id && (
                     <div className="emoji-spinner-overlay">
-                      <span class="emoji-loader"></span>
+                      <span className="emoji-loader"></span>
                     </div>
                   )}
                 </div>
