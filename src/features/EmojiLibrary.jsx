@@ -2,7 +2,7 @@ import { useEffect, useState, useMemo } from "react";
 import { loadEmojisPage } from "@/services/emojis.service";
 import { searchEmojis } from "./searchEmojis";
 import { EMOJI_CATEGORIES } from "./documents/emojisDocs";
-import { copyEmojiPngToClipboard } from "@/services/emojis.service";
+import { copyEmojiPngToClipboard, copyOrDownloadEmoji } from "@/services/emojis.service";
 import { useToast } from "@/context/ToastContext";
 
 import "@/styles/emoji-library/_emojiLibrary.scss";
