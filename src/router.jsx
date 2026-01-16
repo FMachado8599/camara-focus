@@ -5,6 +5,7 @@ import StorePage from "./pages/store/StorePage.jsx";
 import EditQR from "./pages/editQR/EditQR.jsx";
 import QRRedirect from "./pages/QRRedirect.jsx";
 import Emojis from "./pages/emojis/EmojisPage.jsx";
+import Write from "./pages/writers/Write.jsx";
 
 export default function AppRouter() {
   return (
@@ -14,6 +15,7 @@ export default function AppRouter() {
         <Route path="/test" element={<CreateQRTest />} />
         <Route path="/store" element={<StorePage />} />
         <Route path="/emojis" element={<Emojis />} />
+        <Route path="/write" element={<Write />}/>
         <Route path="/qr/:id/edit" element={<EditQR />} />
         <Route path="/q/:id" element={<QRRedirect />} />
       </Routes>

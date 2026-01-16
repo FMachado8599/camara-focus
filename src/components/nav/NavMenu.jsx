@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { TextSearch, Settings, Smile, Brush } from "lucide-react";
+import { TextSearch, Settings, Smile, Brush, PencilLine } from "lucide-react";
 
 function NavMenu() {
     return (
@@ -11,16 +11,22 @@ function NavMenu() {
                         QR Guardados
                     </Link>
                 </div>
-                <div className="menu-links">
-                    <Brush  size={16} />
-                    <Link to="/store" onClick={() => setOpen(false)}>
-                        Iconos
+                <div className="menu-links enabled">
+                    <PencilLine size={16} />
+                    <Link to="/write" onClick={() => setOpen(false)}>
+                        Redactar
                     </Link>
                 </div>
                 <div className="menu-links enabled">
                     <Smile size={16} />
                     <Link to="/emojis" onClick={() => setOpen(false)}>
                         Emojis
+                    </Link>
+                </div>
+                <div className="menu-links">
+                    <Brush  size={16} />
+                    <Link to="/store" onClick={() => setOpen(false)}>
+                        Iconos
                     </Link>
                 </div>
                 <div className="menu-links">

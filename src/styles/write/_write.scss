@@ -1,0 +1,23 @@
+.page-container{
+    & .main-layout{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 24px;
+        gap: 24px;
+        & .toolsPanel{
+            display: none;
+            gap: 16px;
+            flex-direction: column;
+            & div{
+                border: 1px solid grey;
+            }
+        }
+        & .toolsPanel.open{
+            display: flex;
+            max-height: 780px;
+            overflow: hidden;
+        }
+    }
+}
