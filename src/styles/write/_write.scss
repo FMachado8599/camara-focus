@@ -10,9 +10,10 @@
             display: none;
             gap: 16px;
             flex-direction: column;
-            & div{
-                border: 1px solid grey;
-            }
+            background-color: rgb(10, 10, 10);
+            border-radius: 3rem;
+            filter: drop-shadow(-10px 10px 15px Black);
+            padding: 1rem;
         }
         & .toolsPanel.open{
             display: flex;
